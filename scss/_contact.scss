@@ -22,6 +22,9 @@
     grid-template-columns: 1fr;
     grid-gap: 2rem;
     font-size: 1.5rem;
+    & .text-secondary{
+      line-height: 120%;
+    }
   }
 
   .social-icons {

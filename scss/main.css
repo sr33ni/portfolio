@@ -285,6 +285,9 @@
   grid-gap: 2rem;
   font-size: 1.5rem;
 }
+.contact__list .text-secondary {
+  line-height: 120%;
+}
 .contact .social-icons {
   position: initial;
   margin-top: 2rem;
