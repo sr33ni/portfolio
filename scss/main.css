@@ -151,6 +151,7 @@
 }
 .about__bio-image p {
   margin-bottom: 2rem;
+  line-height: 120%;
 }
 .about__bio {
   width: 80%;
@@ -183,6 +184,7 @@
 }
 .about footer {
   transform: rotate(90deg) translate(-3rem, -5rem);
+  right: 1.9rem;
 }
 
 .projects {
@@ -261,6 +263,7 @@
 }
 .projects footer {
   transform: rotate(90deg) translate(-3rem, -5rem);
+  right: 1.9rem;
 }
 
 .contact {
@@ -285,6 +288,11 @@
 .contact .social-icons {
   position: initial;
   margin-top: 2rem;
+}
+@media (max-width: 700px) {
+  .contact {
+    padding-top: 20vh;
+  }
 }
 
 @media screen and (min-width: 768px) {

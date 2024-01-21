@@ -28,4 +28,7 @@
     position: initial;
     margin-top: 2rem;
   }
+  @media (max-width: 700px) {
+    padding-top: 20vh;
+  }
 }
