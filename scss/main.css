@@ -160,6 +160,9 @@
 .about__bio .text-secondary {
   padding-bottom: 1rem;
 }
+.about__bio h2 {
+  font-size: 60px;
+}
 .about .jobs {
   width: 60vw;
   margin: 2rem auto 0 auto;
@@ -172,10 +175,15 @@
   padding: 0.5rem;
   border-bottom: 5px solid #f4841a;
 }
-.about .jobs__job h2, .about .jobs__job h3 {
+.about .jobs__job > div {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.about .jobs__job > div h2, .about .jobs__job > div h3 {
   margin: 0.5rem 0;
 }
-.about .jobs__job h6 {
+.about .jobs__job > div h6 {
   margin: 0.3rem 0;
 }
 .about .social-icons {
@@ -309,7 +317,7 @@
     display: block;
     transform: translateY(0);
     height: 100%;
-    background: transparent;
+    background: #004c56;
     text-align: right;
   }
   .nav .menu-nav__item {

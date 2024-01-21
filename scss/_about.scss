@@ -28,6 +28,9 @@
     .text-secondary {
       padding-bottom: 1rem;
     }
+    h2{
+      font-size: 60px;
+    }
   }
 
   .jobs {
@@ -41,12 +44,16 @@
       background: lighten($primary-color, 10%);
       padding: 0.5rem;
       border-bottom: 5px solid $secondary-color;
-
-      h2, h3 {
-        margin: 0.5rem 0;
-      }
-      h6 {
-        margin: 0.3rem 0;
+      & > div{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        h2, h3 {
+          margin: 0.5rem 0;
+        }
+        h6 {
+          margin: 0.3rem 0;
+        }
       }
     }
   }
