@@ -23,3 +23,35 @@
     }
   }
 }
+.bookmark-image{
+  -webkit-mask-image: url(../img/bookmark-image.svg);
+   mask-image: url(../img/bookmark-image.svg);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: auto;
+  background: url(../img/bookmark-image.svg) $secondary-color;
+  background-size: 0px;
+  position: absolute;
+  z-index: 3;
+  left: 100px;
+  width: 140px;
+  height: 200px;
+  top: -8px;
+  -webkit-animation: easein 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  animation: easein 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  @media (max-width: 991.98px) {
+    left: 20px;
+  }
+  @media (max-width: 767.98px) {
+    width: 100px;
+    height: 50px;
+    left: 20px;
+  }
+}
+@keyframes easein {
+  from {
+    top: -200px;
+  }
+  to {
+    top: -8px;
+  }
+}
