@@ -10,7 +10,9 @@
       rgba($primary-color, 0.9),
       rgba($primary-color, 0.3)
     );
-
+    @media (max-width: 767.98px) {
+      padding-top: 30vh;
+    }
   &__name {
     font-size: 5rem;
     padding-bottom: 1rem;
