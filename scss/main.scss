@@ -5,9 +5,11 @@
 @import 'projects';
 @import 'contact';
 @import 'responsive';
-
+*{
+  
+}
 body {
-  background: $primary-color;
+  background-color: antiquewhite;
   color: set-text-color($primary-color);
   height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -53,7 +55,30 @@ main {
     }
   }
 }
-
+.see-more{
+  margin: 10px auto;
+  width: 98%;
+  border-bottom: 1px solid $secondary-color;
+  padding: 10px;
+  border-top: 1px solid $secondary-color;
+  font-size: 1.3rem;
+  line-height: 100%;
+  text-align: end;
+  i{
+    position: relative;
+    height: 17px;
+    width: 20px;
+    display: inline-block;
+  }
+  i::before{
+    content: url("../img/circle-arrow-right.svg");
+    top: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}
 footer {
   font-size: 1rem;
   position: fixed;

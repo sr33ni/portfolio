@@ -61,6 +61,7 @@
   opacity: 0.98;
   visibility: hidden;
 
+
   &.open {
     visibility: visible;
   }
@@ -85,6 +86,18 @@
     &__item {
       transform: translateX(100vw);
       @include transition-ease;
+      @include media-md {
+      &.badge{
+        a{
+          padding: 10px;
+          background-color: $third-color;
+          color: $secondary-color;
+          border-radius: 8px;
+          border-radius: 100vw;
+          background: antiquewhite;
+        }
+      }
+    }
 
       &.open {
        transform: translateX(0); 
@@ -106,6 +119,23 @@
       &:hover {
         color: $secondary-color;
       }
+    }
+  }
+  @include media-md {
+    &.nav-indicator{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px;
+    border-bottom: 1px solid $secondary-color;
+    border-top: 1px solid $secondary-color;
+    width: 98%;
+    left: unset;
+    top: 10px;
+    }
+    .menu-nav{
+        &__link{
+        padding: 1rem 0;
+        }
     }
   }
 }
