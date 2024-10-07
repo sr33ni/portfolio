@@ -3,10 +3,10 @@
 @import 'menu';
 @import 'about';
 @import 'projects';
-@import 'contact';
+@import 'explore';
 @import 'responsive';
 *{
-  
+  transition: all ease 0.2s;
 }
 body {
   background-color: antiquewhite;
@@ -34,6 +34,7 @@ header {
   z-index: 2;
   width: 100%;
   padding: 1rem;
+  height: 80px;
 }
 
 main {
@@ -87,4 +88,93 @@ footer {
   text-align: right;
   padding: 1rem;
   color: set-text-color($primary-color);
+}
+hr{
+  border: 0;
+  border-top: 1px solid #000;
+}
+hr{
+  &.bubble-hr{
+    position: relative;
+    overflow: visible;
+    &::after{
+      content: "";
+      position: absolute;
+      height: 9px;
+      width: 9px;
+      background-color: #000;
+      border-radius: 100vw;
+      right: 0;
+      margin-top: -5px;
+    }
+    &::before{
+      content: "";
+      position: absolute;
+      height: 9px;
+      width: 9px;
+      background-color: #000;
+      border-radius: 100vw;
+      left: 0;
+      margin-top: -5px;
+    }
+  }
+}
+.info-card{
+  color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #000;
+  height: 100%;
+  h2{
+    font-size: large;
+  }
+  h4{
+    font-size: large;
+  }
+  h6{
+    font-size: large;
+  }
+  p{
+    font-size: large;
+  }
+  .end-content-info{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+  }
+}
+.heading-icon{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  h1{
+
+  }
+  a{
+    border: 1px solid #000;
+    border-radius: 100vw;
+    width: 28px;
+    height: 28px;
+    position: relative;
+    &::after{
+      content: "";
+      display: inline-block;
+      mask-image: url(../img/angle-down.svg);
+      background-image: url(../img/angle-down.svg);
+      background-color: #000;
+      mask-position: 50%;
+      background-size: 0px;
+      background-position: 0%;
+      mask-repeat: no-repeat;
+      mask-size: auto;
+      position: absolute;
+      inset: 2px;
+    }
+  }
+}
+.round-pill{
+  display: inline-flex;
+  border: 1px solid #000;
+  padding: 2px 10px;
+  border-radius: 1rem;
 }

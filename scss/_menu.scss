@@ -93,8 +93,42 @@
           background-color: $third-color;
           color: $secondary-color;
           border-radius: 8px;
-          border-radius: 100vw;
-          background: antiquewhite;
+          border: 1px solid $secondary-color;
+        }
+      }
+      &.menu-icon{
+        a{
+          padding: 0;
+            border: 1px solid #000;
+            border-radius: 7px;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            top: 9px;
+            &:after{
+              content: "";
+              display: inline-block;
+              background-color: #000;
+              mask-position: 50%;
+              background-size: 0px;
+              background-position: 0%;
+              mask-repeat: no-repeat;
+              mask-size: auto;
+              position: absolute;
+              inset: 7px;
+          }
+          &.home-icon{
+            &:after{
+              mask-image: url(../img/house-blank.svg);
+              background-image: url(../img/house-blank.svg);
+            }
+          }
+          &.user-icon{
+            &:after{
+              mask-image: url(../img/user.svg);
+              background-image: url(../img/user.svg);
+            }
+          }
         }
       }
     }
@@ -105,6 +139,22 @@
 
       &.active > a {
         color: $secondary-color;
+        position: relative;
+        &::after{
+          content: "";
+          position: absolute;
+          width: auto;
+          height: 1px;
+          bottom: 0;
+          left: -10px;
+          background-color: $secondary-color;
+          right: -10px;
+        }
+      }
+      &.active-icon > a {
+          background-color: $secondary-color;
+          border-color: $primary-color;
+          color: $primary-color;
       }
     }
 
@@ -131,10 +181,11 @@
     width: 98%;
     left: unset;
     top: 10px;
+    background-color: antiquewhite;
     }
     .menu-nav{
         &__link{
-        padding: 1rem 0;
+        padding: 1.2rem 0;
         }
     }
   }

@@ -10,12 +10,15 @@
       display: block;
       transform: translateY(0);
       height: 100%;
-      background: $third-color;
+      background: transparent;
       text-align: right;
 
       &__item {
         display: inline;
         padding-right: 1.5rem;
+        &.menu-icon{
+          padding-right: 1rem;
+        }
       }
 
       &__link {
