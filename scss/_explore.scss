@@ -6,11 +6,18 @@
   display: flex;
   padding-top: 80px;
   gap: 1px;
+  @include media-md-max {
+    overflow: auto;
+    flex-wrap: wrap;
+  }
   &__list {
     flex:  1 1 calc(100% / 3);
     height: 100%;
-    background-color: #fff;
+    background-color: $secondary-color;
     border-right: 1px solid #000;
+    @include media-md-max {
+      flex: 1 1 100%;
+    }
     &:last-of-type{
       border: 0;
     }
@@ -38,7 +45,8 @@
           margin-bottom: 10px;
           img{
             width: 100%;
-            height: auto;
+            height: 100%;
+            border-radius: 10px;
           }
         }
         .bubble-content-info{
@@ -115,8 +123,7 @@
       }
     }
   }
-
-  @media (max-width: 700px) {
-    padding-top: 20vh;
+  @include media-md-max {
+    padding-top: 7vh;
   }
 }

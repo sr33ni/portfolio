@@ -28,7 +28,7 @@
           mask-image: url(../img/arrow-down-right.svg);
           mask-repeat: no-repeat;
           mask-size: auto;
-          background: url(../img/arrow-down-right.svg) #f4841a;
+          background: url(../img/arrow-down-right.svg) $primary-color;
           background-size: 0px;
           padding: 13rem 11rem;
           display: inline-block;
@@ -67,13 +67,14 @@
         justify-content: center;
         > {
           section{
-            background-color: $secondary-color;
-            height: 75%;
+            background-color: $third-color;
+            height: 80%;
             width: 90%;
             border-radius: 10px;
             > p{
               font-size: 12rem;
               font-weight: 700;
+              color: $fourth-color;
             }
           }
         }

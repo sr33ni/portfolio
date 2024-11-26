@@ -9,7 +9,7 @@
   transition: all ease 0.2s;
 }
 body {
-  background-color: antiquewhite;
+  background-color: $secondary-color;
   color: set-text-color($primary-color);
   height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -28,7 +28,39 @@ a {
 .text-secondary {
   color: $secondary-color;
 }
-
+.bg-primary {
+  background-color: $primary-color !important;
+}
+.txt-third {
+  color: $third-color !important;
+  &::after{
+    content: "";
+    background-color: $third-color !important;
+  }
+}
+.border-color-third {
+  border-color: $third-color !important;
+}
+.bg-third {
+  background-color: $third-color !important;
+}
+.txt-fourth {
+  color: $fourth-color !important;
+}
+.bg-fourth {
+  background-color: $fourth-color !important;
+}
+.overflow-visible{
+  overflow: visible !important;
+}
+.border-white{
+  border-color: $white-fff-color !important;
+}
+.pseudo-bg-white::before,
+.pseudo-bg-white::after{
+  content: "";
+  background-color: $white-fff-color !important;
+}
 header {
   position: fixed;
   z-index: 2;
@@ -59,12 +91,15 @@ main {
 .see-more{
   margin: 10px auto;
   width: 98%;
-  border-bottom: 1px solid $secondary-color;
+  border-bottom: 1px solid $primary-color;
   padding: 10px;
-  border-top: 1px solid $secondary-color;
+  border-top: 1px solid $primary-color;
   font-size: 1.3rem;
   line-height: 100%;
   text-align: end;
+  a{
+    color: $primary-color;
+  }
   i{
     position: relative;
     height: 17px;
@@ -72,12 +107,18 @@ main {
     display: inline-block;
   }
   i::before{
-    content: url("../img/circle-arrow-right.svg");
-    top: 0;
-    left: 0;
+    content: "";
+    display: inline-block;
+    mask-image: url(../img/circle-arrow-right.svg);
+    background-image: url(../img/circle-arrow-right.svg);
+    background-color: $primary-color;
+    mask-position: 50%;
+    background-size: 0px;
+    background-position: 0%;
+    mask-repeat: no-repeat;
+    mask-size: auto;
     position: absolute;
-    right: 0;
-    bottom: 0;
+    inset: -3px;
   }
 }
 footer {
@@ -177,4 +218,23 @@ hr{
   border: 1px solid #000;
   padding: 2px 10px;
   border-radius: 1rem;
+}
+.info-icon{
+  width: 20px;
+  height: 20px;
+  position: relative;
+  &::after{
+    content: "";
+    display: inline-block;
+    mask-image: url(../img/circle-info.svg);
+    background-image: url(../img/circle-info.svg);
+    background-color: #000;
+    mask-position: 50%;
+    background-size: 0px;
+    background-position: 0%;
+    mask-repeat: no-repeat;
+    mask-size: auto;
+    position: absolute;
+    inset: 2px;
+  }
 }
