@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="scss/main.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>About Sreenivas KS</title>
 </head>
 <body>
@@ -13,9 +12,14 @@
     <div class="menu-btn">
       <span class="menu-btn__burger"></span>
     </div>
-
-    <nav class="nav">
+    
+    <nav class="nav nav-indicator">
       <ul class="menu-nav">
+        <li class="menu-nav__item badge">
+          <a href="index.html" class="menu-nav__link">
+            SK
+          </a>
+        </li>
         <li class="menu-nav__item">
           <a href="index.html" class="menu-nav__link">
             Home
@@ -23,17 +27,35 @@
         </li>
         <li class="menu-nav__item active">
           <a href="about.html" class="menu-nav__link">
-            About Me
+            About
+          </a>
+        </li>
+        <li class="menu-nav__item">
+          <a href="explore.html" class="menu-nav__link">
+            Explore
           </a>
         </li>
         <li class="menu-nav__item">
           <a href="projects.html" class="menu-nav__link">
-            My Projects
+            Project
           </a>
         </li>
-        <li class="menu-nav__item">
-          <a href="contact.html" class="menu-nav__link">
-            Contact Me
+        </ul>
+        <ul class="menu-nav overflow-visible">
+          <li class="menu-nav__item menu-icon">
+            <a href="index.html" class="menu-nav__link home-icon">
+            </a>
+          </li>
+        <li class="menu-nav__item menu-icon active-icon">
+          <a href="about.html" class="menu-nav__link user-icon">
+          </a>
+        </li>
+        <li class="menu-nav__item menu-icon">
+          <a href="explore.html" class="menu-nav__link explore-icon">
+          </a>
+        </li>
+        <li class="menu-nav__item menu-icon">
+          <a href="projects.html" class="menu-nav__link project-icon">
           </a>
         </li>
       </ul>
@@ -42,60 +64,61 @@
 
   <main>
     <section class="about">
-      <div class="about__bio-image">
-        <div class="about__bio">
-          <h2 class="text-secondary">Profile</h2>
-          <p>Design and develop efficient and intuitive user interfaces for web applications while continuing
-            to learn and expand my knowledge of emerging web technologies.
-            After these years of experience and expertise in hand,
-            creating conveying and collaborating complex designs into
-            seamless clean and responsive web applications has always
-            helped users with a profound web experience            
-            </p>
-        </div>
+      <div>
+        <section>
+          <p>Hello,</p>
+          <h2>My name is Sreenivas ks</h2>
+          <p>The best designs disappear into the background, enabling users to focus on their tasks, their goals, and their creativity.</p>
+        </section>
       </div>
-      <div class="jobs">
-        <h1 class="text-secondary text-center">Experience</h1>
-        <div class="jobs__job">
+      <div>
+        <section>
           <div>
-            <h2 class="text-secondary">2021 - Present</h2>
-            <h2>UI UX developer</h2>
+            <div class="heading-icon">
+              <h2>Introduction</h2>
+              <a></a>
+            </div>
+            <div class="info-card">
+              <h2>UI Developer</h2>
+              <div class="img-text">
+                <p>After all these years of experience and expertise in hand,creating conveying and collaborating complex designs into seamless clean and responsive web applications has always helped users with a profound web experience</p>
+                <span class="span-image-tag"><img alt="image" src="img/ux.jpg"></span>
+              </div>
+            </div>
           </div>
+          <hr>
           <div>
-            <h3 >Zerone Consulting</h3>
+            <div class="heading-icon">
+              <h2>Get In Touch</h2>
+              <a></a>
+            </div>
+            <div class="info-card-container">
+              <div class="info-card mail-info">
+                <a class="" href="mailto:s4sreeniks@gmail.com"> <i class="icon"></i></a>
+                <hr class="bubble-hr">
+                <a href="mailto:s4sreeniks@gmail.com">s4sreeniks@gmail.com</a>
+              </div>
+              <div class="info-card linkedin-info">
+                <a href="https://www.linkedin.com/in/s4sreeni/" target="_blank" class=""> <i class="icon"></i></a>
+                <hr class="bubble-hr">
+                <a href="https://www.linkedin.com/in/s4sreeni/" target="_blank">s4sreeni</a>
+              </div>
+              <div class="git-info info-card">
+                <a href="https://github.com/sr33ni/" target="_blank" class=""> <i class="icon"></i></a>
+                <hr class="bubble-hr">
+                <a href="https://github.com/sr33ni/" target="_blank">sr33ni</a>
+              </div>
+              <div class="bg-overlay">
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
-      <div class="jobs">
-        <h1 class="text-secondary">Education</h1>
-        <div class="jobs__job">
-          <div>
-            <h2 class="text-secondary">2016- 2019</h2>
-            <h2>Mahatma Gandhi University</h2>
-          </div>
-          <div>
-            <h3>Bachelor of Computer Science.</h3>
-          </div>
-        </div>
-        <div class="jobs__job">
-          <h2 class="text-secondary">2013 - 2015</h2>
-          <h2>Higher secondary education</h2>
-        </div>
-      </div>
-      <div class="social-icons">
-        <a href="https://www.linkedin.com/in/s4sreeni">
-          <i class="fab fa-linkedin fa-2x"></i>
-        </a>
-        <a href="https://www.instagram.com/sreeni_ks/">
-          <i class="fab fa-instagram fa-2x"></i>
-        </a>
-        <a href="https://github.com/sr33ni">
-          <i class="fab fa-github fa-2x"></i>
-        </a>
-      </div>
-
-      <footer>&copy; Copyright </footer>
     </section>
+    <div class="see-more">
+      <a href="explore.html" >See more <i class="fa-solid fa-circle-arrow-right"></i>
+      </a>
+    </div>
   </main>
 
   <script src="https://kit.fontawesome.com/6d2ea823d0.js"></script>

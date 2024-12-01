@@ -1,62 +1,265 @@
 .about {
-  padding-bottom: 2rem;
-
-  &__bio-image {
-    height: 50vh;
-    width: 100%;
-    background: 
-      linear-gradient(
-        to right,
-        rgba($primary-color, 0.9),
-        rgba($primary-color, 0.3)
-      ),;
-    display: flex;
-    flex-direction: column;
+    height: calc(100vh - 65px);
+    overflow: hidden;
     align-items: center;
-    justify-content: flex-end;
-
-    p {
-      margin-bottom: 2rem;
-      line-height: 120%;
-    }
-  }
-
-  &__bio {
-    width: 80%;
     text-align: center;
-
-    .text-secondary {
-      padding-bottom: 1rem;
+    display: flex;
+    padding-top: 80px;
+    @include media-md-max {
+      padding-top: 40px;
     }
-    h2{
-      font-size: 60px;
-    }
-  }
-
-  .jobs {
-    width: 60vw;
-    margin: 2rem auto 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 2rem;
-
-    &__job {
-      background: lighten($primary-color, 10%);
-      padding: 0.5rem;
-      border-bottom: 5px solid $secondary-color;
-      & > div{
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        h2, h3 {
-          margin: 0.5rem 0;
+    > div{
+      flex: 1 1 100%;
+      height: 100%;  
+      &:nth-of-type(1){
+        max-width: 30%;
+        display:flex;
+        flex-direction: column;
+        @include media-md-max {
+          display: none;
         }
-        h6 {
-          margin: 0.3rem 0;
+        > {
+          section{
+            &:nth-of-type(1){
+              margin: 20px;
+              border-radius: 10px;
+              padding: 10px;
+              height: 100%;
+              text-align: left;
+              color: $white-fff-color;
+              background-image: url(../img/1234.jpeg);
+              background-position: center;
+              background-size: cover;  
+              display: flex;
+              flex-direction: column;
+              p{
+                font-size: 20px;
+                z-index: 1;
+                line-height: normal;
+              }    
+              h2{
+                font-size: 4rem;
+                z-index: 1;
+                font-weight: 500;
+              } 
+              p{
+                &:last-of-type{
+                  font-size: 1rem;
+                  margin-top: auto;
+                }
+              }  
+              position: relative; 
+              &:after{
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-color: rgb(5 5 5 / 31%);;
+                z-index: 0;
+              }
+              // &:hover{
+              //   p{
+              //     display: none;
+              //   }
+              //   h2{
+              //     display: none;
+              //   }
+              //   &:after{
+              //     display: none;
+              //   }
+              // }
+            }
+          }
+        }
+      }
+      &:nth-of-type(2){
+        max-width: 65%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        flex-direction: column;
+        @include media-md-max {
+          max-width: 100%;
+        }
+        > {
+          section{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;        
+            hr{
+              margin: 0px 0;
+            }
+            > div{
+              color: #000;
+              text-align: left;
+              margin: 20px;
+              padding: 10px;
+            &:nth-of-type(1){
+              height: 50%;
+              .info-card{
+                height: calc(100% - 40px);
+                overflow: auto;
+                h2{
+                  margin: 5px 0px;
+                }
+                .img-text{
+                  display: flex;
+                  gap: 10px;
+                  @include media-md-max {
+                    flex-direction: column;
+                  }
+                  p{
+                    line-height: normal;
+                  }
+                  .span-image-tag{
+                    max-width: 115px;
+                    @include media-md-max {
+                      max-width: 100%;
+                    }
+                    img{
+                      width: 100%;
+                    }
+                  }
+                }
+              }
+            }
+            &:nth-of-type(2){
+              height: 50%;
+              > div{
+                &.info-card-container{
+                  height: calc(100% - 40px);
+                  display: flex;
+                  gap: 15px;
+                  @include media-md-max {
+                    flex-direction: column;
+                    overflow: auto;
+                    height: calc(100% - 115px);
+                    padding-right: 8px;            
+                  }
+                  .info-card{
+                    display: flex;
+                    flex-direction: column;
+                    color: #000;
+                    cursor: pointer;
+                    a{
+                      i{
+                        &::after{
+                          content: "";
+                          display: inline-block;
+                          mask-position: 0%;
+                          background-size: 0px;
+                          background-position: 0%;
+                          mask-repeat: no-repeat;
+                          mask-size: auto;
+                        }
+                      }
+                      &:last-of-type{
+                        text-align: right;
+                        padding: 5px 15px;
+                      }
+                      color: inherit;
+                    }
+                    hr{
+                      margin-top: auto;
+                    }
+                    flex: 1 1 calc(100% / 3);
+
+                    &.mail-info{
+                      .icon{
+                        width: 75px;
+                        display: inline-block;
+                        &::after{
+                          mask-image: url(../img/gmail.svg);
+                          background-image: url(../img/gmail.svg);
+                          background-color: $fourth-color;
+                          padding: 2.7rem 2.9rem;
+                        }
+                      }
+                    }
+                    &.linkedin-info{
+                      .icon{
+                        width: 75px;
+                        display: inline-block;
+                        &::after{
+                          content: "";
+                          mask-image: url(../img/linkedin.svg);
+                          background-image: url(../img/linkedin.svg);
+                          background-color: $fourth-color;
+                          padding: 2.7rem;
+                        }
+                      }
+
+                    }  
+                    &.git-info{
+                      .icon{
+                        width: 75px;
+                        display: inline-block;
+                        &::after{
+                          content: "";
+                          mask-image: url(../img/github.svg);
+                          background-image: url(../img/github.svg);
+                          background-color: $fourth-color;
+                          padding: 2.7rem;
+                        }
+                      }
+
+                    }                        
+                    @include media-lg {
+                    &:has( ~ :hover){
+                      scale: 0.9;
+                    }
+                    &:hover ~ .info-card{
+                      scale: 0.9;
+                    }
+                    &:hover{
+                      scale: 1.1;
+                      z-index: 9;
+                    }
+                    &:hover ~ .bg-overlay{
+                      scale: 1;
+                    }
+                    &:hover{
+                      &.mail-info{
+                        .icon{
+                          &::after{
+                            background-size: auto;
+                          }
+                        }
+                      }
+                      &.linkedin-info{
+                        .icon{
+                          &::after{
+                            background-color: #0077B5;
+                          }
+                        }
+                       }
+                       &.git-info{
+                        .icon{
+                          &::after{
+                            background-color: #1B1F24;
+                          }
+                        }
+                       }
+                    }
+                  }
+                  }
+                  .bg-overlay{
+                    scale: 0;
+                    position: fixed;
+                    inset: 0;
+                    background-color: #dcdcdc81;
+                    z-index: 3;
+                  }
+                }
+              }
+            }
+            }
+          }
         }
       }
     }
-  }
+
+
 
   .social-icons {
     display: flex;

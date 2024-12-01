@@ -61,8 +61,11 @@
   opacity: 0.98;
   visibility: hidden;
 
+
   &.open {
     visibility: visible;
+    height: 100vh;
+    background: $primary-color;
   }
 
   .menu-nav {
@@ -70,14 +73,17 @@
     flex-flow: column wrap;
     align-items: center;
     justify-content: center;
-    height: 100vh;
     overflow: hidden;
-    background: $primary-color;
     list-style-type: none;
     padding-right: 1rem;
     transform: translateY(-100%);
     @include transition-ease;
-
+    @include media-md-max {
+        &:first-of-type{
+          display: none;
+        }
+        gap: 20px;
+    }
     &.open {
       transform: translateY(0);
     }
@@ -85,13 +91,126 @@
     &__item {
       transform: translateX(100vw);
       @include transition-ease;
+      @include media-md-max {
+        flex: 0 0 auto;
+    }
+      &.badge{
+        a{
+          padding: 10px;
+          background-color: $primary-color;
+          color: $secondary-color;
+          border-radius: 8px;
+          border: 1px solid $primary-color;
+        }
+      }
+      &.menu-icon{
+        a{
+          padding: 0;
+            border: 1px solid #000;
+            border-radius: 7px;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            top: 9px;
+            @include media-md-max {
+              width: 140px;
+              height: 140px;
+            }
+            &:after{
+              content: "";
+              display: inline-block;
+              background-color: #000;
+              mask-position: 50%;
+              background-size: 0px;
+              background-position: 0%;
+              mask-repeat: no-repeat;
+              mask-size: auto;
+              position: absolute;
+              inset: 7px;
+          }
+          &.home-icon{
+            &:after{
+              mask-image: url(../img/house-blank.svg);
+              background-image: url(../img/house-blank.svg);
+            }
+          }
+          &.user-icon{
+            &:after{
+              mask-image: url(../img/user.svg);
+              background-image: url(../img/user.svg);
+            }
+          }
+          &.explore-icon{
+            &:after{
+              mask-image: url(../img/compass.svg);
+              background-image: url(../img/compass.svg);
+            }
+          }
+          &.project-icon{
+            &:after{
+              mask-image: url(../img/rectangle-terminal.svg);
+              background-image: url(../img/rectangle-terminal.svg);
+            }
+          }
+          @include media-md-max {
+            &.home-icon{
+              &:after{
+                mask-image: url(../img/house-blank.svg);
+                background-image: url(../img/house-blank.svg);
+              }
+            }
+            &.user-icon{
+              &:after{
+                mask-image: url(../img/user.svg);
+                background-image: url(../img/user.svg);
+              }
+            }
+            &.explore-icon{
+              &:after{
+                mask-image: url(../img/compass.svg);
+                background-image: url(../img/compass.svg);
+              }
+            }
+            &.project-icon{
+              &:after{
+                mask-image: url(../img/rectangle-terminal.svg);
+                background-image: url(../img/rectangle-terminal.svg);
+              }
+            }
+          }
+        }
+      }
+    
 
       &.open {
        transform: translateX(0); 
       }
 
       &.active > a {
-        color: $secondary-color;
+        color: $primary-color;
+        position: relative;
+        &::after{
+          content: "";
+          position: absolute;
+          width: auto;
+          height: 1px;
+          bottom: 0;
+          left: -10px;
+          background-color: $primary-color;
+          right: -10px;
+        }
+      }
+      &.active-icon > a {
+          background-color: $primary-color;
+          border-color: $primary-color;
+          color: $primary-color;
+          &::after{
+            content: "";
+            background-color: $secondary-color;
+          }
+          @include media-md-max {
+            border-color: $white-fff-color;
+          }
       }
     }
 
@@ -104,8 +223,26 @@
       @include transition-ease;
 
       &:hover {
-        color: $secondary-color;
+        color: $primary-color;
       }
+    }
+  }
+  @include media-md {
+    &.nav-indicator{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px;
+    border-bottom: 1px solid $primary-color;
+    border-top: 1px solid $primary-color;
+    width: 98%;
+    left: unset;
+    top: 10px;
+    background-color: $secondary-color;
+    }
+    .menu-nav{
+        &__link{
+        padding: 1.2rem 0;
+        }
     }
   }
 }

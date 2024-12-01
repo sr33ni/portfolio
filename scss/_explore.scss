@@ -1,0 +1,138 @@
+.explore {
+  height: calc(100vh - 0px);
+  overflow: hidden;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  padding-top: 80px;
+  gap: 1px;
+  @include media-md-max {
+    overflow: auto;
+    flex-wrap: wrap;
+  }
+  &__list {
+    flex:  1 1 calc(100% / 3);
+    height: 100%;
+    background-color: $secondary-color;
+    border-right: 1px solid #000;
+    @include media-md-max {
+      flex: 1 1 100%;
+      border-right: 0;
+    }
+    &:last-of-type{
+      border: 0;
+    }
+    .info-card-container-row{
+      margin: 20px;
+      color: #000;
+      .margin-hr{
+        margin: 15px 0;
+      }
+      .info-card{
+        text-align: left;
+        padding: 10px;
+        .gray-text{
+          display: inline-block;
+          padding: 15px 5px 5px 5px
+        }
+        .title-text{
+          padding: 5px 5px 25px 5px
+        }
+        .img-container{
+          height: 150px;
+          display: block;
+          border-radius: 10px;
+          overflow: hidden;
+          margin-bottom: 10px;
+          img{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+          }
+        }
+        .bubble-content-info{
+          display: flex;
+          gap: 4px;
+          > span{
+            display: inline-block;
+            border: 1px solid #000;
+            border-radius: 7px;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            &:after{
+              content: "";
+              display: inline-block;
+              background-color: #000;
+              mask-position: 50%;
+              background-size: 0px;
+              background-position: 0%;
+              mask-repeat: no-repeat;
+              mask-size: auto;
+              position: absolute;
+              inset: 3px;
+            }
+            &.html-icon{
+              &:after{
+                mask-image: url(../img/html5.svg);
+                background-image: url(../img/html5.svg);
+                background-color: #ff5733;
+              }
+            }
+            &.css-icon{
+              &:after{
+                // mask-image: url(../img/css3-alt.svg);
+                // background-image: url(../img/css3-alt.svg);
+                // background-color: #264de4;
+                // content: url(../img/css.svg);
+                background-image: url(../img/css.svg);
+                background-size: 32px;
+                background-color: transparent;
+                background-repeat: no-repeat;
+                background-position: 50%;
+              }
+            }
+            &.js-icon{
+              &:after{
+                mask-image: url(../img/js.svg);
+                background-image: url(../img/js.svg);
+                background-color: #f0db4f;
+              }
+            }
+            &.git-icon{
+              &:after{
+                mask-image: url(../img/git-alt.svg);
+                background-image: url(../img/git-alt.svg);
+                background-color: #F1502F;
+              }
+            }
+            &.sass-icon{
+              &:after{
+                mask-image: url(../img/sass.svg);
+                background-image: url(../img/sass.svg);
+                background-color: #cc6699;
+              }
+            }
+            &.react-icon{
+              &:after{
+                mask-image: url(../img/react.svg);
+                background-image: url(../img/react.svg);
+                background-color: #61DBFB;
+              }
+            }
+            &.bootstrap-icon{
+              &:after{
+                mask-image: url(../img/bootstrap.svg);
+                background-image: url(../img/bootstrap.svg);
+                background-color: #563d7c;
+              }
+            }
+           }
+        }
+      }
+    }
+  }
+  @include media-md-max {
+    padding-top: 7vh;
+  }
+}
