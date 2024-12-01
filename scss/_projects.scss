@@ -1,112 +1,135 @@
 .projects {
-  padding-bottom: 2rem;
+  padding-top: 80px;
+  @include media-md-max {
+    padding-top: 40px;
+  }
+}
 
-  &__bio-image {
-    height: 30vh;
-    width: 100%;
-    background: 
-      linear-gradient(
-        to right,
-        rgba($primary-color, 0.9),
-        rgba($primary-color, 0.3)
-      ),;
+// masonry layout
+.masonry-grid-container {  
+  background-color: $secondary-color;
+  height: calc(100vh - 80px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 1em 1em;
+  grid-auto-flow: row;
+  padding: 1rem;
+  grid-template-areas:
+    "a b b"
+    "c b b"
+    "c d e"
+    "f f e"
+    "f f g";
+    @include media-md-max {
+      display: flex;
+      flex-direction: column;   
+    }
+}
+.item-a { grid-area: a; }
+
+.item-b { grid-area: b; }
+
+.item-c { grid-area: c; }
+
+.item-d { grid-area: d; }
+
+.item-e { grid-area: e; }
+
+.item-f { grid-area: f; }
+
+.item-g { grid-area: g; }
+
+.masonry-grid-container > div[class] {
+  background: #ececec;
+  position: relative;
+  border-radius: 1rem;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  justify-content: stretch;
+}
+.masonry-grid-container{
+  .info-card{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-
-    .text-secondary {
-      font-size: 2rem;
-      margin-bottom: 2rem;
+    @include media-md {
+      background-size: 100%;
     }
-  }
-
-  &__items {
-    width: 60vw;
-    margin: 2rem auto 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 2rem;
-  }
-
-  &__item {
+    background-size: cover;
     position: relative;
-    border-bottom: 5px solid $secondary-color;
     overflow: hidden;
-    cursor: pointer;
-
-    img {
-      width: 100%;
-      height: 100%;
+    justify-content: space-around;
+    > {
+      div{
+        z-index: 2;
+        @include media-md {
+          opacity: 0;
+        }
+      }
+      hr{
+        z-index: 2;
+        @include media-md {
+          opacity: 0;
+        }
+      }
     }
-
-    &::after {
-      content: '';
+    @include media-md {
+    &:hover{
+        background-size : 120% !important;
+          div{
+            opacity: 1;
+          }
+          hr{
+            opacity: 1;
+          }
+    }
+  }
+    &::after{
+      content: "";
       position: absolute;
-      top: 100%;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: $secondary-color;
-      opacity: 0;
-      @include transition-ease;
-    }
-
-    &:hover {
-      &::after {
-        top: 0;
-        opacity: 0.9;
+      inset: 0;
+      z-index: 1;
+      background-color: rgb(255 255 255 / 59%) !important;
+      @include media-md {
+        background-color:rgba(255, 255, 255, 0.093) !important;
       }
-      .projects__btn {
-        opacity: 1;
+      @include media-md {
+        &:hover{
+          &::after{
+            background-color: rgb(255 255 255 / 59%) !important;
+          }
+        }
       }
     }
-  }
-
-  &__btns {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    text-align: center;
-  }
-
-  &__btn {
-    opacity: 0;
-    color: set-text-color($secondary-color);
-    @include transition-ease;
-
-    &:hover {
-      color: set-text-color(set-text-color($secondary-color));
+    @include media-md {
+      &:hover{
+        &::after{
+          background-color: rgb(255 255 255 / 59%) !important;
+        }
+      }
+    }
+    background-repeat: no-repeat;
+    .end-content-info{
+      &:first-of-type{
+        justify-content: flex-start;
+        gap: 5px;
+        flex-wrap: wrap;
+        .info-icon{
+          margin-left: auto;
+          @include media-md-max {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+          }
+        }
+      }
+    } 
+    .title-text{
+      margin: 7px 0px;
+      font-weight: 500;
     }
   }
 
-  .social-icons {
-    display: flex;
-    flex-direction: column;
-  }
-
-  footer {
-    transform:
-      rotate(90deg)
-      translate(-3rem, -5rem);
-      right: 1.9rem;
-  }
-  
 }
-.react-logo{
-  -webkit-animation: App-logo-spin 20s linear infinite;
-    animation: App-logo-spin 20s linear infinite;
-}
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+// masonry layout

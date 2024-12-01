@@ -24,12 +24,20 @@ a {
   color: set-text-color($primary-color);
   text-decoration: none;
 }
-
+.d-none{
+  display: none !important;
+}
 .text-secondary {
   color: $secondary-color;
 }
+.txt-fff {
+  color: $white-fff-color;
+}
 .bg-primary {
   background-color: $primary-color !important;
+}
+.bg-secondary {
+  background-color: $secondary-color !important;
 }
 .txt-third {
   color: $third-color !important;
@@ -41,11 +49,31 @@ a {
 .border-color-third {
   border-color: $third-color !important;
 }
+.border-color-fourth {
+  border-color: $fourth-color !important;
+}
 .bg-third {
   background-color: $third-color !important;
 }
 .txt-fourth {
   color: $fourth-color !important;
+  &::after{
+    content: "";
+    background-color: $fourth-color !important;
+  }
+  .pseudo-bg-white::before,
+  .pseudo-bg-white::after{
+  content: "";
+  background-color: $fourth-color !important;
+  }
+  .border-white{
+    border-color: $fourth-color !important;
+  }
+  .icon-content{
+    &::after{
+      background-color: $fourth-color !important;
+    }
+  }
 }
 .bg-fourth {
   background-color: $fourth-color !important;
@@ -63,10 +91,14 @@ a {
 }
 header {
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   width: 100%;
   padding: 1rem;
   height: 80px;
+  background-color: $secondary-color;
+  @include media-md-max {
+    height: 55px;
+  }
 }
 
 main {
@@ -166,6 +198,7 @@ hr{
   border-radius: 10px;
   border: 1px solid #000;
   height: 100%;
+  position: relative;
   h2{
     font-size: large;
   }
@@ -182,6 +215,12 @@ hr{
     display: flex;
     justify-content: space-between;
     padding: 5px 10px;
+  }
+  .warp-pill-container{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap !important;
+    gap: 5px;
   }
 }
 .heading-icon{
@@ -215,9 +254,36 @@ hr{
 }
 .round-pill{
   display: inline-flex;
-  border: 1px solid #000;
-  padding: 2px 10px;
-  border-radius: 1rem;
+      border: 1px solid #000;
+      padding: 5px 10px;
+      border-radius: 1rem;
+      align-items: center;
+      justify-content: center;
+      line-height: 100%;
+}
+a{
+  &.icon-content{
+    &:not([href]){
+      opacity: 0.3;
+      cursor: default;
+      &:hover{
+        &::after{
+          inset: 2px;
+        }
+      }
+    }
+  }
+}
+@mixin common-icon-style{
+  display: inline-block;
+  background-color: #000;
+  mask-position: 50%;
+  background-size: 0px;
+  background-position: 0%;
+  mask-repeat: no-repeat;
+  mask-size: auto;
+  position: absolute;
+  inset: 2px;
 }
 .info-icon{
   width: 20px;
@@ -225,16 +291,40 @@ hr{
   position: relative;
   &::after{
     content: "";
-    display: inline-block;
+    @include common-icon-style;
     mask-image: url(../img/circle-info.svg);
     background-image: url(../img/circle-info.svg);
-    background-color: #000;
-    mask-position: 50%;
-    background-size: 0px;
-    background-position: 0%;
-    mask-repeat: no-repeat;
-    mask-size: auto;
-    position: absolute;
-    inset: 2px;
+  }
+}
+.eye-icon{
+  width: 30px;
+  height: 30px;
+  position: relative;
+  &::after{
+    content: "";
+    @include common-icon-style;
+    mask-image: url(../img/eye.svg);
+    background-image: url(../img/eye.svg);
+  }
+  &:hover{
+    &::after{
+      inset: -3px;
+    }
+  }
+}
+.github-icon{
+  width: 30px;
+  height: 30px;
+  position: relative;
+  &::after{
+    content: "";
+    @include common-icon-style;
+    mask-image: url(../img/github.svg);
+    background-image: url(../img/github.svg);
+  }
+  &:hover{
+    &::after{
+      inset: -3px;
+    }
   }
 }

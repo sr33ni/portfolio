@@ -25,3 +25,17 @@ function toggleMenu() {
     showMenu = false;
   }
 }
+
+let setName = document.getElementById("name");
+let setInfo = document.getElementById("info") 
+let textinit = 0 ;
+let textinfo = "A UI Developer crafting intuitive, engaging interfaces"
+let textstart = 'Nice meeting you';
+let textspeed = 50;
+window.onload = function typing() {
+if(  textinit < textinfo.length){
+    // setName.innerHTML += textstart.charAt(textinit);
+    setInfo.innerHTML += textinfo.charAt(textinit)
+    textinit++
+    setTimeout(typing, textspeed)
+}}

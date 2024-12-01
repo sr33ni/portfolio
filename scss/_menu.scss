@@ -146,6 +146,12 @@
               background-image: url(../img/compass.svg);
             }
           }
+          &.project-icon{
+            &:after{
+              mask-image: url(../img/rectangle-terminal.svg);
+              background-image: url(../img/rectangle-terminal.svg);
+            }
+          }
           @include media-md-max {
             &.home-icon{
               &:after{
@@ -163,6 +169,12 @@
               &:after{
                 mask-image: url(../img/compass.svg);
                 background-image: url(../img/compass.svg);
+              }
+            }
+            &.project-icon{
+              &:after{
+                mask-image: url(../img/rectangle-terminal.svg);
+                background-image: url(../img/rectangle-terminal.svg);
               }
             }
           }
