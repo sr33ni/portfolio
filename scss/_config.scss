@@ -33,6 +33,11 @@ $white-fff-color: #FFFFFF;
     @content;
   }
 }
+@mixin media-991-min {
+  @media screen and (min-width: 991px) {
+    @content;
+  }
+}
 @mixin media-lg {
   @media screen and (min-width: 1024px) {
     @content;

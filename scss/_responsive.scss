@@ -14,9 +14,9 @@
       text-align: right;
       &__item {
         display: inline;
-        padding-right: 1.5rem;
+        padding-right: 0.5rem;
         &.menu-icon{
-          padding-right: 1rem;
+          padding-right: 0rem;
         }
       }
 
@@ -46,7 +46,18 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
+@include media-991-min{
+  .nav {
+  .menu-nav {
+    &__item {
+      padding-right: 1.5rem;
+      &.menu-icon{
+        padding-right: 1rem;
+      }
+    }
+  }
+}
+}
 @include media-lg {
   .projects {
     &__items {
