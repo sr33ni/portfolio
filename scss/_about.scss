@@ -38,7 +38,7 @@
                 line-height: normal;
               }    
               h2{
-                font-size: 4rem;
+                font-size: clamp(1rem, -1.5rem + 8vw, 4rem);
                 z-index: 1;
                 font-weight: 500;
               } 
@@ -101,17 +101,19 @@
                 overflow: auto;
                 h2{
                   margin: 5px 0px;
+                  font-weight: 500;
                 }
                 .img-text{
                   display: flex;
                   gap: 10px;
-                  @include media-md-max {
-                    flex-direction: column;
-                  }
+
                   p{
                     line-height: normal;
                   }
                   .span-image-tag{
+                    @include media-md-max {
+                      display: none;
+                    }
                     max-width: 115px;
                     @include media-md-max {
                       max-width: 100%;

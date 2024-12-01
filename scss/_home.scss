@@ -62,6 +62,9 @@
               > div{
                 border-bottom: 1px solid $primary-color;
                 margin-left: 20px;
+                @include media-md-max {
+                  margin-left: 0;
+                }
                 > {
                   a{
                     padding: 10px;
