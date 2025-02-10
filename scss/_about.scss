@@ -1,6 +1,6 @@
 .about {
     height: calc(100vh - 65px);
-    overflow: auto;
+    overflow: hidden;
     align-items: center;
     text-align: center;
     display: flex;
@@ -85,7 +85,8 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            gap: 10px;        
+            gap: 10px;       
+            overflow: auto; 
             hr{
               margin: 0px 0;
             }

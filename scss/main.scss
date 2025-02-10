@@ -15,13 +15,13 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1;
 }
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 5px;
   height: 5px;
   background-color: $primary-color;
 }
-body::-webkit-scrollbar-thumb {
-  background-color: fourth-color;
+*::-webkit-scrollbar-thumb {
+  background-color: $fourth-color;
   border-radius: 1.25rem;
 }
 h1, h2, h3 {
