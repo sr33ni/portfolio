@@ -6,10 +6,11 @@
 
 .home {
   height: calc(100vh - 65px);
-  overflow: hidden;
+  overflow: auto;
   align-items: center;
   text-align: center;
   display: flex;
+  padding-top: 80px;
 }
 @media screen and (max-width: 768px) {
   .home {
@@ -397,7 +398,7 @@
 
 .about {
   height: calc(100vh - 65px);
-  overflow: hidden;
+  overflow: auto;
   align-items: center;
   text-align: center;
   display: flex;
@@ -806,6 +807,7 @@
   height: 100%;
   background-color: #F4F1EB;
   border-right: 1px solid #000;
+  overflow: auto;
 }
 @media screen and (max-width: 768px) {
   .explore__list {
