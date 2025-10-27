@@ -658,7 +658,7 @@
   gap: 1em 1em;
   grid-auto-flow: row;
   padding: 1rem;
-  grid-template-areas: "a b b" "c b b" "c d e" "f f e" "f f g";
+  grid-template-areas: "a b b" "c b b" "c d e" "f f e" "f f g" "h i i" "j 0 0";
 }
 @media screen and (max-width: 768px) {
   .masonry-grid-container {
@@ -693,6 +693,18 @@
 
 .item-g {
   grid-area: g;
+}
+
+.item-h {
+  grid-area: h;
+}
+
+.item-i {
+  grid-area: i;
+}
+
+.item-j {
+  grid-area: j;
 }
 
 .masonry-grid-container > div[class] {
