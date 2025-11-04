@@ -658,7 +658,7 @@
   gap: 1em 1em;
   grid-auto-flow: row;
   padding: 1rem;
-  grid-template-areas: "a b b" "c b b" "c d e" "f f e" "f f g" "h i i" "j 0 0";
+  grid-template-areas: "a b b" "c b b" "c d e" "f f e" "f f g" "h i i" "j j 0" "j j 0";
 }
 @media screen and (max-width: 768px) {
   .masonry-grid-container {

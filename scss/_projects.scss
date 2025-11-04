@@ -21,7 +21,9 @@
     "c d e"
     "f f e"
     "f f g"
-    "h i i";
+    "h i i"
+    "j j 0"
+    "j j 0";
     @include media-md-max {
       display: flex;
       flex-direction: column;   
@@ -45,6 +47,7 @@
 
 .item-i { grid-area: i; }
 
+.item-j { grid-area: j; }
 
 .masonry-grid-container > div[class] {
   background: #ececec;
