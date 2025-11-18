@@ -104,6 +104,9 @@
               @include media-md-max {
                 font-size: 2rem;
               }
+              @include media-md-sm {
+                font-size: 1.9rem;
+              }
               &#info{
                 display: inline-block;
                 position: relative;

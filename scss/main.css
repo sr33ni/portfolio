@@ -126,6 +126,11 @@
     font-size: 2rem;
   }
 }
+@media screen and (max-width: 568px) {
+  .home > div:nth-of-type(2) > section > p {
+    font-size: 1.9rem;
+  }
+}
 .home > div:nth-of-type(2) > section > p#info {
   display: inline-block;
   position: relative;
@@ -1373,4 +1378,26 @@ a.icon-content:not([href]):hover::after {
 }
 .github-icon:hover::after {
   inset: -3px;
+}
+
+.box-to-observe-top {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.box-to-observe-top.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.box-to-observe-bottom {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: all 0.6s ease-out;
+}
+
+.box-to-observe-bottom.active {
+  opacity: 1;
+  transform: translateY(0);
 }/*# sourceMappingURL=main.css.map */
