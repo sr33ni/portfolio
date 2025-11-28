@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
   <head>
     <meta charset="utf-8" />
@@ -11,13 +7,13 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="" />
-     <link rel="stylesheet" href="scss/main.css">
+    <link rel="stylesheet" href="scss/main.css" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   </head>
   <body>
     <div id="box" style="width: 100px; height: 100px; background: red"></div>
-    <header>
+    <header class="header">
       <nav>
         <ul>
           <li>
@@ -32,7 +28,8 @@
         </ul>
       </nav>
     </header>
-
+ <div class="box"></div>
+ 
     <script>
       const tl = gsap.timeline({ defaults: { duration: 1 } });
 
@@ -40,6 +37,18 @@
         .to("#box", { y: 150 })
         .to("#box", { rotation: 360, scale: 1.5 })
         .to("#box", { opacity: 0.3 });
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.to(".box", {
+    opacity: 1,
+    y: 0,
+    duration: 1,
+    scrollTrigger: {
+      trigger: ".box",
+      start: "top 80%",   // when the top of box hits 80% of viewport
+    }
+  });
     </script>
   </body>
 </html>
