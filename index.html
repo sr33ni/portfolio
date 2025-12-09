@@ -4,65 +4,568 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="scss/main.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Sreenivas KS Portfolio</title>
+  <!-- GSAP core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- ScrollTrigger plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+/* ------------------ DEBUG ------------------ */
+[data-debug='true'] li {
+  outline: 0.05em dashed currentColor;
+}
+
+[data-debug='true'] h2,
+[data-debug='true'] li:last-of-type {
+  outline: 0.05em dashed canvasText;
+}
+
+/* ------------------ SCROLLBAR ------------------ */
+
+@property --hue {
+  initial-value: 0;
+  syntax: '<number>';
+  inherits: false;
+}
+
+@property --chroma {
+  initial-value: 0;
+  syntax: '<number>';
+  inherits: true;
+}
+
+[data-sync-scrollbar='true'] {
+  scrollbar-color: oklch(var(--lightness) var(--chroma) var(--hue)) transparent;
+}
+
+@supports (animation-timeline: scroll()) and (animation-range: 0% 100%) {
+  [data-sync-scrollbar='true'][data-animate='true'] {
+    timeline-scope: --list;
+    scrollbar-color: oklch(var(--lightness) var(--chroma, 0) var(--hue)) transparent;
+
+    animation-name: change, chroma-on, chroma-off;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-range: entry 50% exit 50%, entry 40% entry 50%, exit 30% exit 40%;
+    animation-timeline: --list;
+  }
+
+  [data-sync-scrollbar='true'][data-animate='true'] ul {
+    view-timeline: --list;
+  }
+}
+
+@keyframes change {
+  to {
+    --hue: var(--end);
+  }
+}
+
+@keyframes chroma-on {
+  to {
+    --chroma: 0.3;
+  }
+}
+
+@keyframes chroma-off {
+  to {
+    --chroma: 0;
+  }
+}
+
+/* ------------------ EFFECT ------------------ */
+
+:root {
+  --start: 0;
+  --end: 360;
+  --lightness: 65%;
+  --base-chroma: 0.3;
+
+  --font-size-min: 14;
+  --font-size-max: 20;
+  --font-ratio-min: 1.1;
+  --font-ratio-max: 1.33;
+  --font-width-min: 375;
+  --font-width-max: 1500;
+}
+
+[data-theme='dark'] {
+  --lightness: 75%;
+}
+
+[data-theme='light'] {
+  --lightness: 65%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lightness: 75%;
+  }
+}
+a{
+  color: #F4F1EB;
+  text-decoration: none;
+}
+ul {
+  --step: calc((var(--end) - var(--start)) / (var(--count) - 1));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
+}
+
+
+@supports (animation-timeline: scroll()) {
+  [data-animate='true'] li {
+    opacity: 0.2;
+    animation-name: brighten;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-range: cover calc(50% - 1lh) calc(50% + 1lh);
+    animation-timeline: view();
+  }
+
+  [data-animate='true'] li:first-of-type {
+    --start-opacity: 1;
+  }
+
+  [data-animate='true'] li:last-of-type {
+    --brightness: 1;
+    --end-opacity: 1;
+  }
+}
+
+@keyframes brighten {
+  0% {
+    opacity: var(--start-opacity, 0.2);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(var(--brightness, 1.2));
+  }
+  100% {
+    opacity: var(--end-opacity, 0.2);
+  }
+}
+
+/* ------------------ STICKY SECTIONS ------------------ */
+
+section:first-of-type {
+  --font-level: 6;
+  display: flex;
+  line-height: 1.25;
+  width: 100%;
+  padding-left: 5rem;
+}
+
+section:last-of-type {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section:last-of-type h2 {
+  --font-level: 6;
+}
+
+main {
+  width: 100%;
+}
+
+section:first-of-type h2 {
+  position: sticky;
+  top: calc(50% - 0.5lh);
+  display: inline-block;
+  height: fit-content;
+  margin: 0;
+  font-weight: 600;
+}
+
+[data-snap='true'] {
+  scroll-snap-type: y proximity;
+}
+
+[data-snap='true'] li {
+  scroll-snap-align: center;
+}
+
+h2,
+li:last-of-type {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #F4F1EB;
+}
+h2{
+  font-size: 7rem;
+}
+/* ------------------ DEMO ------------------ */
+
+header {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-inline: 5rem;
+}
+
+footer {
+  padding-block: 2rem;
+  opacity: 0.5;
+}
+
+h1 {
+  --font-size-min: 24;
+  --font-level: 8;
+  line-height: 1;
+  margin: 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #F4F1EB;
+}
+h1 > span:nth-of-type(1){
+  font-size: 4rem;
+}
+h1 > span:nth-of-type(2){
+  display: block;
+  font-size: 11rem;
+}
+
+
+/* ------------------ BASE ------------------ */
+
+html {
+  color-scheme: light dark;
+}
+
+[data-theme='light'] {
+  color-scheme: light only;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark only;
+}
+
+.fluid {
+  --fluid-min: calc(
+    var(--font-size-min) * pow(var(--font-ratio-min), var(--font-level, 0))
+  );
+  --fluid-max: calc(
+    var(--font-size-max) * pow(var(--font-ratio-max), var(--font-level, 0))
+  );
+  --fluid-preferred: calc(
+    (var(--fluid-max) - var(--fluid-min)) /
+      (var(--font-width-max) - var(--font-width-min))
+  );
+
+  font-size: clamp(
+    (var(--fluid-min) / 16) * 1rem,
+    ((var(--fluid-min) / 16) * 1rem) -
+      (((var(--fluid-preferred) * var(--font-width-min)) / 16) * 1rem) +
+      (var(--fluid-preferred) * 100vi),
+    (var(--fluid-max) / 16) * 1rem
+  );
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  /* background: light-dark(white, black); */
+  background-color: #2B77A4;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body::before {
+  --size: 45px;
+  --line: color-mix(in hsl, canvasText, transparent 70%);
+
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background:
+    linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size),
+    linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size);
+
+  mask: linear-gradient(-20deg, transparent 50%, white);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.bear-link {
+  color: canvasText;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: 48px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  opacity: 0.8;
+}
+
+.bear-link:hover {
+  opacity: 1;
+}
+
+.bear-link svg {
+  width: 75%;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+div.tp-dfwv {
+  position: fixed;
+}
+
+</style>
 </head>
 <body>
-  <header class="box-to-observe-top">
-    <div class="menu-btn">
-      <span class="menu-btn__burger"></span>
-    </div>
-    
-    <nav class="nav nav-indicator">
-      <ul class="menu-nav">
-        <li class="menu-nav__item badge">
-          <a href="about.html" class="menu-nav__link">
-            SK
-          </a>
-        </li>
-        <li class="menu-nav__item active">
-          <a href="index.html" class="menu-nav__link">
-            Sreenivas ks
-          </a>
-        </li>
+<header>
+      <h1 class="fluid">
+        <span>Sreenivas ks</span>
+        <span>Web Designer</span>
+        </h1>
+    </header>
+    <main>
+      <section class="content fluid">
+        <h2><span aria-hidden="true">Handle with&nbsp;</span>
+          <span class="sr-only">you can ship things.</span>
+        </h2>
+        <ul aria-hidden="true" style="--count: 22">
+          <li style="--i: 0">HTML</li>
+          <li style="--i: 1">CSS</li>
+          <li style="--i: 2">JS</li>
+          <li style="--i: 3">React</li>
+          <li style="--i: 4">Bootstrap</li>
+          <li style="--i: 5">SCSS</li>
+          <li style="--i: 6">Tailwind</li>
+          <li style="--i: 7">VUE.js</li>
+          <li style="--i: 8">Shopify</li>
+          <li style="--i: 9">CSS in JS</li>
+          <li style="--i: 10">Responsive</li>
+          <li style="--i: 11">GSAP</li>
+          <li style="--i: 12">SEO</li>
+          <li style="--i: 13">Jquery</li>
+          <li style="--i: 14">WCAG</li>
         </ul>
-        <ul class="menu-nav">
-        <li class="menu-nav__item">
-          <a href="about.html" class="menu-nav__link">
-            UI Developer
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+      </section>
+      <section>
+        <h2 class="fluid"><a href="about.html">about</a></h2>
+      </section>
+    </main>
 
-  <main>
-    <section class="home">
-      <div>
-        <section>
-          <span class="arrow-down-right "></span>
-        </section>
-        <section>
-          <div><a href="explore.html"><strong>#</strong>explore</a> <a href="https://react-ui-three-teal.vercel.app/" target="_blank"><strong>#</strong>react-dashboard</a></div>
-          <div><a href="about.html"><strong>#</strong>about</a><a href="./resume.pdf" target="_blank" download=""><strong>#</strong>resume</a><a href="about.html"><strong>#</strong>seemore</a></div>
-          <div><a href="https://first-vue-nd36.vercel.app/" target="_blank"><strong>#</strong>Vue.js website</a></div>
-          <div><a href="https://www.linkedin.com/in/s4sreeni/" target="_blank"><strong>#</strong>linkedin</a><a href="projects.html"><strong>#</strong>Projects</a><a href="https://github.com/sr33ni/" target="_blank"><strong>#</strong>github</a></div>
-        </section>
-      </div>
-      <div class="box-to-observe-bottom">
-        <section>
-          <p>Hi, I’m Sreenivas ks</p>
-          <p id="info"></p>
-        </section>
-      </div>
-    </section>
-    <div class="see-more">
-      <a href="about.html" >See more <i class="fa-solid fa-circle-arrow-right"></i>
-      </a>
-    </div>
-  </main>
+  <script>
+    import { Pane } from 'https://cdn.skypack.dev/tweakpane@4.0.4'
+import gsap from 'https://cdn.skypack.dev/gsap@3.12.0'
+import ScrollTrigger from 'https://cdn.skypack.dev/gsap@3.12.0/ScrollTrigger'
 
-  <script src="js/main.js"></script>
+const config = {
+  theme: 'dark',
+  animate: true,
+  snap: true,
+  start: gsap.utils.random(0, 100, 1),
+  end: gsap.utils.random(900, 1000, 1),
+  scroll: true,
+  debug: false,
+}
+
+const ctrl = new Pane({
+  title: 'Config',
+  expanded: false,
+})
+
+let items
+let scrollerScrub
+let dimmerScrub
+let chromaEntry
+let chromaExit
+
+const update = () => {
+  document.documentElement.dataset.theme = config.theme
+  document.documentElement.dataset.syncScrollbar = config.scroll
+  document.documentElement.dataset.animate = config.animate
+  document.documentElement.dataset.snap = config.snap
+  document.documentElement.dataset.debug = config.debug
+  document.documentElement.style.setProperty('--start', config.start)
+  document.documentElement.style.setProperty('--hue', config.start)
+  document.documentElement.style.setProperty('--end', config.end)
+
+  if (!config.animate) {
+    chromaEntry?.scrollTrigger.disable(true, false)
+    chromaExit?.scrollTrigger.disable(true, false)
+    dimmerScrub?.disable(true, false)
+    scrollerScrub?.disable(true, false)
+    gsap.set(items, { opacity: 1 })
+    gsap.set(document.documentElement, { '--chroma': 0 })
+  } else {
+    gsap.set(items, { opacity: (i) => (i !== 0 ? 0.2 : 1) })
+    dimmerScrub.enable(true, true)
+    scrollerScrub.enable(true, true)
+    chromaEntry.scrollTrigger.enable(true, true)
+    chromaExit.scrollTrigger.enable(true, true)
+  }
+}
+
+const sync = (event) => {
+  if (
+    !document.startViewTransition ||
+    event.target.controller.view.labelElement.innerText !== 'Theme'
+  )
+    return update()
+  document.startViewTransition(() => update())
+}
+ctrl.addBinding(config, 'animate', {
+  label: 'Animate',
+})
+ctrl.addBinding(config, 'snap', {
+  label: 'Snap',
+})
+ctrl.addBinding(config, 'start', {
+  label: 'Hue Start',
+  min: 0,
+  max: 1000,
+  step: 1,
+})
+ctrl.addBinding(config, 'end', {
+  label: 'Hue End',
+  min: 0,
+  max: 1000,
+  step: 1,
+})
+ctrl.addBinding(config, 'scroll', {
+  label: 'Scrollbar',
+})
+ctrl.addBinding(config, 'debug', {
+  label: 'Debug',
+})
+
+ctrl.addBinding(config, 'theme', {
+  label: 'Theme',
+  options: {
+    System: 'system',
+    Light: 'light',
+    Dark: 'dark',
+  },
+})
+
+ctrl.on('change', sync)
+
+// backfill the scroll functionality with GSAP
+if (
+  !CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)')
+) {
+  gsap.registerPlugin(ScrollTrigger)
+
+  // animate the items with GSAP if there's no CSS support
+  items = gsap.utils.toArray('ul li')
+
+  gsap.set(items, { opacity: (i) => (i !== 0 ? 0.2 : 1) })
+
+  const dimmer = gsap
+    .timeline()
+    .to(items.slice(1), {
+      opacity: 1,
+      stagger: 0.5,
+    })
+    .to(
+      items.slice(0, items.length - 1),
+      {
+        opacity: 0.2,
+        stagger: 0.5,
+      },
+      0
+    )
+
+  dimmerScrub = ScrollTrigger.create({
+    trigger: items[0],
+    endTrigger: items[items.length - 1],
+    start: 'center center',
+    end: 'center center',
+    animation: dimmer,
+    scrub: 0.2,
+  })
+
+  // register scrollbar changer
+  const scroller = gsap.timeline().fromTo(
+    document.documentElement,
+    {
+      '--hue': config.start,
+    },
+    {
+      '--hue': config.end,
+      ease: 'none',
+    }
+  )
+
+  scrollerScrub = ScrollTrigger.create({
+    trigger: items[0],
+    endTrigger: items[items.length - 1],
+    start: 'center center',
+    end: 'center center',
+    animation: scroller,
+    scrub: 0.2,
+  })
+
+  chromaEntry = gsap.fromTo(
+    document.documentElement,
+    {
+      '--chroma': 0,
+    },
+    {
+      '--chroma': 0.3,
+      ease: 'none',
+      scrollTrigger: {
+        scrub: 0.2,
+        trigger: items[0],
+        start: 'center center+=40',
+        end: 'center center',
+      },
+    }
+  )
+  chromaExit = gsap.fromTo(
+    document.documentElement,
+    {
+      '--chroma': 0.3,
+    },
+    {
+      '--chroma': 0,
+      ease: 'none',
+      scrollTrigger: {
+        scrub: 0.2,
+        trigger: items[items.length - 2],
+        start: 'center center',
+        end: 'center center-=40',
+      },
+    }
+  )
+}
+// run it
+update()
+
+    </script>
 </body>
 </html>
