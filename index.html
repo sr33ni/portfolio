@@ -7,565 +7,1072 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Sreenivas KS Portfolio</title>
-  <!-- GSAP core -->
+<!-- GSAP Core -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-<!-- ScrollTrigger plugin -->
+<!-- ScrollTrigger -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- ScrollToPlugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+<!-- SplitText (NOT on public CDN — needs GSAP Club) -->
+<script src="https://assets.codepen.io/16327/SplitText3.min.js"></script>
+
+<!-- ScrollSmoother (also GSAP Club plugin) -->
+<script src="https://assets.codepen.io/16327/ScrollSmoother.min.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
-
-/* ------------------ DEBUG ------------------ */
-[data-debug='true'] li {
-  outline: 0.05em dashed currentColor;
-}
-
-[data-debug='true'] h2,
-[data-debug='true'] li:last-of-type {
-  outline: 0.05em dashed canvasText;
-}
-
-/* ------------------ SCROLLBAR ------------------ */
-
-@property --hue {
-  initial-value: 0;
-  syntax: '<number>';
-  inherits: false;
-}
-
-@property --chroma {
-  initial-value: 0;
-  syntax: '<number>';
-  inherits: true;
-}
-
-[data-sync-scrollbar='true'] {
-  scrollbar-color: oklch(var(--lightness) var(--chroma) var(--hue)) transparent;
-}
-
-@supports (animation-timeline: scroll()) and (animation-range: 0% 100%) {
-  [data-sync-scrollbar='true'][data-animate='true'] {
-    timeline-scope: --list;
-    scrollbar-color: oklch(var(--lightness) var(--chroma, 0) var(--hue)) transparent;
-
-    animation-name: change, chroma-on, chroma-off;
-    animation-fill-mode: both;
-    animation-timing-function: linear;
-    animation-range: entry 50% exit 50%, entry 40% entry 50%, exit 30% exit 40%;
-    animation-timeline: --list;
-  }
-
-  [data-sync-scrollbar='true'][data-animate='true'] ul {
-    view-timeline: --list;
-  }
-}
-
-@keyframes change {
-  to {
-    --hue: var(--end);
-  }
-}
-
-@keyframes chroma-on {
-  to {
-    --chroma: 0.3;
-  }
-}
-
-@keyframes chroma-off {
-  to {
-    --chroma: 0;
-  }
-}
-
-/* ------------------ EFFECT ------------------ */
-
-:root {
-  --start: 0;
-  --end: 360;
-  --lightness: 65%;
-  --base-chroma: 0.3;
-
-  --font-size-min: 14;
-  --font-size-max: 20;
-  --font-ratio-min: 1.1;
-  --font-ratio-max: 1.33;
-  --font-width-min: 375;
-  --font-width-max: 1500;
-}
-
-[data-theme='dark'] {
-  --lightness: 75%;
-}
-
-[data-theme='light'] {
-  --lightness: 65%;
-}
-
-@media (prefers-color-scheme: dark) {
   :root {
-    --lightness: 75%;
-  }
+    --dark: #242423;
 }
-a{
-  color: #F4F1EB;
-  text-decoration: none;
-}
-ul {
-  --step: calc((var(--end) - var(--start)) / (var(--count) - 1));
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-weight: 600;
-}
-
-
-@supports (animation-timeline: scroll()) {
-  [data-animate='true'] li {
-    opacity: 0.2;
-    animation-name: brighten;
-    animation-fill-mode: both;
-    animation-timing-function: linear;
-    animation-range: cover calc(50% - 1lh) calc(50% + 1lh);
-    animation-timeline: view();
-  }
-
-  [data-animate='true'] li:first-of-type {
-    --start-opacity: 1;
-  }
-
-  [data-animate='true'] li:last-of-type {
-    --brightness: 1;
-    --end-opacity: 1;
-  }
-}
-
-@keyframes brighten {
-  0% {
-    opacity: var(--start-opacity, 0.2);
-  }
-  50% {
-    opacity: 1;
-    filter: brightness(var(--brightness, 1.2));
-  }
-  100% {
-    opacity: var(--end-opacity, 0.2);
-  }
-}
-
-/* ------------------ STICKY SECTIONS ------------------ */
-
-section:first-of-type {
-  --font-level: 6;
-  display: flex;
-  line-height: 1.25;
-  width: 100%;
-  padding-left: 5rem;
-}
-
-section:last-of-type {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-section:last-of-type h2 {
-  --font-level: 6;
-}
-
-main {
-  width: 100%;
-}
-
-section:first-of-type h2 {
-  position: sticky;
-  top: calc(50% - 0.5lh);
-  display: inline-block;
-  height: fit-content;
-  margin: 0;
-  font-weight: 600;
-}
-
-[data-snap='true'] {
-  scroll-snap-type: y proximity;
-}
-
-[data-snap='true'] li {
-  scroll-snap-align: center;
-}
-
-h2,
-li:last-of-type {
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: #F4F1EB;
-}
-h2{
-  font-size: 7rem;
-}
-/* ------------------ DEMO ------------------ */
-
-header {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding-inline: 5rem;
-}
-
-footer {
-  padding-block: 2rem;
-  opacity: 0.5;
-}
-
-h1 {
-  --font-size-min: 24;
-  --font-level: 8;
-  line-height: 1;
-  margin: 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: #F4F1EB;
-}
-h1 > span:nth-of-type(1){
-  font-size: 4rem;
-}
-h1 > span:nth-of-type(2){
-  display: block;
-  font-size: 11rem;
-}
-
-
-/* ------------------ BASE ------------------ */
 
 html {
-  color-scheme: light dark;
+	box-sizing: border-box;
+    /* // scroll-behavior: smooth;
+    // scroll-snap-type: y mandatory; */
 }
 
-[data-theme='light'] {
-  color-scheme: light only;
+*, *:before, *:after {
+	box-sizing: inherit;
 }
 
-[data-theme='dark'] {
-  color-scheme: dark only;
-}
-
-.fluid {
-  --fluid-min: calc(
-    var(--font-size-min) * pow(var(--font-ratio-min), var(--font-level, 0))
-  );
-  --fluid-max: calc(
-    var(--font-size-max) * pow(var(--font-ratio-max), var(--font-level, 0))
-  );
-  --fluid-preferred: calc(
-    (var(--fluid-max) - var(--fluid-min)) /
-      (var(--font-width-max) - var(--font-width-min))
-  );
-
-  font-size: clamp(
-    (var(--fluid-min) / 16) * 1rem,
-    ((var(--fluid-min) / 16) * 1rem) -
-      (((var(--fluid-preferred) * var(--font-width-min)) / 16) * 1rem) +
-      (var(--fluid-preferred) * 100vi),
-    (var(--fluid-max) / 16) * 1rem
-  );
-}
-
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
+html, body {
+	min-height: 100vh;
 }
 
 body {
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
-  /* background: light-dark(white, black); */
-  background-color: #2B77A4;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 14px;
+    color: var(--dark);
+    line-height: 1.3;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* // overflow: hidden; */
+}
+a[href]:not(.footer__link-top){
+  color: #242423;
+  text-decoration: none;
+}
+.logo,
+h1,
+h2 {
+    margin: 0;
+    line-height: 1;
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
 }
 
-body::before {
-  --size: 45px;
-  --line: color-mix(in hsl, canvasText, transparent 70%);
-
-  content: '';
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  background:
-    linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size),
-    linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size);
-
-  mask: linear-gradient(-20deg, transparent 50%, white);
-  pointer-events: none;
-  z-index: -1;
+p {
+    margin: 0;
 }
 
-.bear-link {
-  color: canvasText;
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  width: 48px;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  opacity: 0.8;
+.stage {
+	position: relative;
+    background: white;
+	visibility: hidden;
 }
 
-.bear-link:hover {
-  opacity: 1;
+/*  ========================================================================== 
+    Nav Header
+    ========================================================================== */
+
+.header {
+    position: fixed;
+    left: 40px;
+    top: 24px;
+    z-index: 100;
+    display: flex;
+    
+    @media all and (max-width: 768px) {
+        display: block;
+        left: 24px;
+    }
 }
 
-.bear-link svg {
-  width: 75%;
+.logo {
+    font-size: 27px;
+    letter-spacing: -1px;
 }
 
-/* Screen reader only */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.nav-btn,
+.nav-btn__svg {
+    width: 56px;
+    height: 30px;
 }
 
-div.tp-dfwv {
-  position: fixed;
+.nav-btn {
+    display: block;
+    margin: -2px 0 0 56px;
+    
+    @media all and (max-width: 768px) {
+        margin: 18px 0 0 -6px;
+    }
 }
 
+.nav-btn__svg {
+    pointer-events: none;
+}
+
+/*  ========================================================================== 
+    Intro
+    ========================================================================== */
+
+.intro,
+.footer {
+    height: 100vh;
+}
+
+.intro {
+    position: relative;
+    padding: 5vw;
+    background: #C0D7D8;
+    overflow: hidden;
+}
+
+.intro__content {
+    position: absolute;
+    right: 8%;
+    bottom: 15%;
+    z-index: 3;
+    
+    @media all and (max-width: 768px) {
+        right: auto;
+    }
+}
+
+.intro__title {
+    font-size: 9vw;
+    overflow: hidden;
+    letter-spacing: -0.5vw;
+    padding-right: 2.3vw;
+
+    @media all and (max-width: 768px) {
+        margin-bottom: 5vh;
+    }
+}
+
+.intro__img {
+    position: absolute;
+    width: 35%;
+    max-width: 390px;
+    height: auto;
+    
+    @media all and (max-width: 768px) {
+        width: 75vw;
+    }
+}
+
+.intro__img--1 {
+    z-index: 2;
+    left: 10%;
+    bottom: 35%;
+    
+    @media all and (max-width: 768px) {
+        /* // top: 15vh; */
+        left: 50%;
+        bottom: 50vh;
+    }
+}
+
+.intro__img--2 {
+    z-index: 1;
+    left: 25%;
+    bottom: 40%;
+    
+    @media all and (max-width: 768px) {
+        /* // top: 2vh; */
+        left: 70%;
+        bottom: 60vh;
+    }
+}
+
+.intro__txt {
+    max-width: 35vw;
+    margin-left: 25vw;
+    
+    @media all and (max-width: 768px) {
+        max-width: 80vw;
+        margin-left: 5vw;
+    }
+}
+
+/*  ========================================================================== 
+    Slides
+    ========================================================================== */
+
+.slide {
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+    overflow: hidden;
+    
+    &:nth-of-type(even) {
+        background: #C4CDC4;
+    }
+    
+    @media all and (max-width: 768px) {
+        display: block;
+        position: relative;
+    }
+}
+
+/*  Columns
+    ========================================================================== */
+
+.col {
+    flex-basis: 50%;
+    
+    @media all and (max-width: 768px) {
+        display: block;
+        width: 100%;
+        height: 100vh;
+    }
+}
+
+.col--1 {
+    position: relative;
+    z-index: 1;
+    
+     @media all and (max-width: 768px) {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+.col--2 {
+    position: relative;
+    overflow: hidden;
+    
+    @media all and (max-width: 768px) {
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        top: 0;
+    }
+}
+
+/*  ========================================================================== 
+    Column Content
+    ========================================================================== */
+
+.col__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    height: 100%;
+    padding: 6vw 6vw 10vw;
+    
+    @media all and (max-width: 768px) {
+        width: 80%;
+    }
+}
+
+.col__content--1 {
+    background: #D8C0C0;
+    
+    @media all and (max-width: 768px) {
+        background: rgba(#D8C0C0, 0.9);
+    }
+}
+
+.col__content--2 {
+    background: #CDD5E0;
+    
+    @media all and (max-width: 768px) {
+        background: rgba(#CDD5E0, 0.9);
+    }
+}
+
+.col__content--3 {
+    background: #F3D3B0;
+    
+    @media all and (max-width: 768px) {
+        background: rgba(#F3D3B0, 0.9);
+    }
+}
+
+.col__content--4 {
+    background: #F8E9E6;
+    
+    @media all and (max-width: 768px) {
+        background: rgba(#F8E9E6, 0.9);
+    }
+}
+
+.col__content--5 {
+    background: #D1E2EC;
+    
+    @media all and (max-width: 768px) {
+        background: rgba(#D1E2EC, 0.9);
+    }
+}
+
+.col__content--6 {
+    background: #D7CEC5;
+    
+    @media all and (max-width: 768px) {
+        background: rgba(#D7CEC5, 0.9);
+    }
+}
+
+/*  Column Content
+    ========================================================================== */
+
+.col__content-title {
+    margin: 0 0 2vw;
+    font-size: 11vw;
+    letter-spacing: -0.8vw;
+    
+    @media all and (max-width: 768px) {
+        margin: 0 0 6vw;
+        font-size: 18vw;
+    }
+}
+
+.col__content-wrap {
+    display: flex;
+    justify-content: flex-end;
+    
+    @media all and (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.col__content-txt {
+    max-width: 22vw;
+    order: 2;
+    margin-left: 32px;
+    
+    @media all and (max-width: 768px) {
+        order: 1;
+        max-width: 40vw;
+        margin: 0 0 10vw 10vw;
+    }
+}
+
+.slide-link {
+    position: relative;
+    order: 1;
+    display: flex;
+    justify-content: flex-end;
+    width: 75px;
+    height: 53px;
+    
+    > * {
+        pointer-events: none;
+    }
+    
+    @media all and (max-width: 768px) {
+        order: 2;
+        align-self: flex-end;
+    }
+}
+
+.slide-link__circ {
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    border: 1px solid var(--dark);
+}
+
+.slide-link__line {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 64px;
+    height: 3px;
+    background: var(--dark);
+}
+
+.line {
+    overflow: hidden;
+    
+    &:nth-of-type(even) {
+        margin-top: -1vw;
+    }
+}
+
+.line__inner {
+    display: block;
+}
+
+.slide__scroll-link {
+    position: absolute;
+    right: -113px;
+    bottom: 3.5vw;
+    display: block;
+    width: 140px;
+    height: 140px;
+    background: var(--dark);
+    overflow: hidden;
+    
+    @media all and (max-width: 768px) {
+        display: none;
+    }
+}
+
+.slide__scroll-line {
+    position: absolute;
+    left: 26px;
+    bottom: 0;
+    width: 1px;
+    height: 100%;
+}
+
+.slide--0 {
+    .slide__scroll-line {
+        background: #C0D7D8;
+    }
+}
+
+.slide--1 {
+    .slide__scroll-line {
+        background: #D8C0C0;
+    }
+}
+
+.slide--2 {
+    .slide__scroll-line {
+        background: #CDD5E0;
+    }
+}
+
+.slide--3 {
+    .slide__scroll-line {
+        background: #F3D3B0;
+    }
+}
+
+.slide--4 {
+    .slide__scroll-line {
+        background: #F8E9E6;
+    }
+}
+
+.slide--5 {
+    .slide__scroll-line {
+        background: #D1E2EC;
+    }
+}
+
+.slide--6 {
+    .slide__scroll-line {
+        background: #D7CEC5;
+    }
+}
+
+/*  ========================================================================== 
+    Column Image
+    ========================================================================== */
+
+.col__image-wrap {
+    position: absolute;
+    left: 0;
+    /* // top: 50%; */
+    /* // transform: translateY(-50%); */
+    width: 100%;
+    height: 160vh;
+}
+
+.img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/*  ========================================================================== 
+    Footer
+    ========================================================================== */
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #cecece;
+}
+
+.footer__link {
+    font-size: 5vw;
+    color: var(--dark);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+}
+
+.footer__link-top {
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background: var(--dark);
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+}
+
+.footer__link-top-line {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    width: 1px;
+    height: 50px;
+    background: var(--dark);
+}
+
+.footer__copyright {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+}
 </style>
 </head>
 <body>
-<header>
-      <h1 class="fluid">
-        <span>Sreenivas ks</span>
-        <span>Web Designer</span>
-        </h1>
-    </header>
-    <main>
-      <section class="content fluid">
-        <h2><span aria-hidden="true">Handle with&nbsp;</span>
-          <span class="sr-only">you can ship things.</span>
-        </h2>
-        <ul aria-hidden="true" style="--count: 22">
-          <li style="--i: 0">HTML</li>
-          <li style="--i: 1">CSS</li>
-          <li style="--i: 2">JS</li>
-          <li style="--i: 3">React</li>
-          <li style="--i: 4">Bootstrap</li>
-          <li style="--i: 5">SCSS</li>
-          <li style="--i: 6">Tailwind</li>
-          <li style="--i: 7">VUE.js</li>
-          <li style="--i: 8">Shopify</li>
-          <li style="--i: 9">CSS in JS</li>
-          <li style="--i: 10">Responsive</li>
-          <li style="--i: 11">GSAP</li>
-          <li style="--i: 12">SEO</li>
-          <li style="--i: 13">Jquery</li>
-          <li style="--i: 14">WCAG</li>
-        </ul>
-      </section>
-      <section>
-        <h2 class="fluid"><a href="about.html">about</a></h2>
-      </section>
-    </main>
+<div id="smooth-wrapper">
+    <div class="stage" id="smooth-content">
+        <header class="header">
 
-  <script>
-    import { Pane } from 'https://cdn.skypack.dev/tweakpane@4.0.4'
-import gsap from 'https://cdn.skypack.dev/gsap@3.12.0'
-import ScrollTrigger from 'https://cdn.skypack.dev/gsap@3.12.0/ScrollTrigger'
+            <a href="#" class="nav-btn">
+                <svg class="nav-btn__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 30">
+                    <rect class="nav-rect" width="40" height="2" x="8" y="8" fill="#242423" />
+                    <rect class="nav-rect" width="40" height="2" x="8" y="14" fill="#242423" />
+                    <rect width="40" height="2" x="8" y="20" fill="#242423" />
+                </svg>
+            </a>
+        </header>
 
-const config = {
-  theme: 'dark',
-  animate: true,
-  snap: true,
-  start: gsap.utils.random(0, 100, 1),
-  end: gsap.utils.random(900, 1000, 1),
-  scroll: true,
-  debug: false,
-}
+        <section class="intro slide--0" id="slide-0">
+            <div class="intro__content">
+                <h1 class="intro__title">Web Designer</h1>
+                <p class="intro__txt">
+                 Web design is a canvas where colors, shapes, and light blend into a form of digital poetry. Each pixel settles into place with quiet intention, creating a harmony of structure and imagination that guides the eye with effortless grace. Ideas bloom into elegant, interactive forms, turning the screen into a living artwork that breathes creativity in every detail</p>
+            </div>
+            <img class="intro__img intro__img--1" src="./img/12345.png" />
+            <img class="intro__img intro__img--2" src="./img/wallface.png" />
+        </section>
 
-const ctrl = new Pane({
-  title: 'Config',
-  expanded: false,
-})
+        <section class="slide slide--1" id="slide-1">
+            <div class="col col--1">
+                <div class="col__content col__content--1">
+                    <h2 class="col__content-title"><span class="line__inner">Hello</span><br /><span class="line__inner">I'm Sreeni</span></h2>
+                    <div class="col__content-wrap">
+                        <p class="col__content-txt">Since my full name can’t be written<strong>(Sreenivas Ks)</strong>, most people simply call me Sreeni. A web designer at heart, deeply enthusiastic about creating and collaborating</p>
+                        <a href="#" class="slide-link">
+                            <div class="slide-link__circ"></div>
+                            <div class="slide-link__line"></div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#slide-2" class="slide__scroll-link">
+                    <div class="slide__scroll-line"></div>
+                </a>
+            </div>
+            <div class="col col--2">
+                <div class="col__image-wrap">
+                    <img class="img img--1" src="./img/123456.png" />
+                </div>
+            </div>
+        </section>
 
-let items
-let scrollerScrub
-let dimmerScrub
-let chromaEntry
-let chromaExit
+        <section class="slide slide--2" id="slide-2">
+            <div class="col col--1">
+                <div class="col__content col__content--2">
+                    <h2 class="col__content-title"><span class="line__inner"><a href="./explore.html">About</a></span><br /><span class="line__inner">me</span></h2>
+                    <div class="col__content-wrap">
+                        <p class="col__content-txt"><a href="./explore.html">Check out my Profile ></a></p>
+                        <a href="#" class="slide-link">
+                            <div class="slide-link__circ"></div>
+                            <div class="slide-link__line"></div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#slide-3" class="slide__scroll-link">
+                    <div class="slide__scroll-line"></div>
+                </a>
+            </div>
+            <div class="col col--2">
+                <div class="col__image-wrap">
+                    <img class="img img--1" src="img/about.png" />
+                </div>
+            </div>
+        </section>
 
-const update = () => {
-  document.documentElement.dataset.theme = config.theme
-  document.documentElement.dataset.syncScrollbar = config.scroll
-  document.documentElement.dataset.animate = config.animate
-  document.documentElement.dataset.snap = config.snap
-  document.documentElement.dataset.debug = config.debug
-  document.documentElement.style.setProperty('--start', config.start)
-  document.documentElement.style.setProperty('--hue', config.start)
-  document.documentElement.style.setProperty('--end', config.end)
+        <section class="slide slide--3" id="slide-3">
+            <div class="col col--1">
+                <div class="col__content col__content--3">
+                    <h2 class="col__content-title"><span class="line__inner"><a href="./projects.html">Latest</a></span><br /><span class="line__inner">Work</span></h2>
+                    <div class="col__content-wrap">
+                        <p class="col__content-txt"><a href="./projects.html">Check out my Collaboration ></a></p>
+                        <a href="#" class="slide-link">
+                            <div class="slide-link__circ"></div>
+                            <div class="slide-link__line"></div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#slide-4" class="slide__scroll-link">
+                    <div class="slide__scroll-line"></div>
+                </a>
+            </div>
+            <div class="col col--2">
+                <div class="col__image-wrap">
+                    <img class="img img--1" src="./img/work.png" />
+                </div>
+            </div>
+        </section>
 
-  if (!config.animate) {
-    chromaEntry?.scrollTrigger.disable(true, false)
-    chromaExit?.scrollTrigger.disable(true, false)
-    dimmerScrub?.disable(true, false)
-    scrollerScrub?.disable(true, false)
-    gsap.set(items, { opacity: 1 })
-    gsap.set(document.documentElement, { '--chroma': 0 })
-  } else {
-    gsap.set(items, { opacity: (i) => (i !== 0 ? 0.2 : 1) })
-    dimmerScrub.enable(true, true)
-    scrollerScrub.enable(true, true)
-    chromaEntry.scrollTrigger.enable(true, true)
-    chromaExit.scrollTrigger.enable(true, true)
-  }
-}
+        <section class="slide slide--4" id="slide-4">
+            <div class="col col--1">
+                <div class="col__content col__content--4">
+                    <h2 class="col__content-title"><span class="line__inner"><a>Give a</a></span><br /><span class="line__inner"><a href="tel:7356637327">Call</a></span></h2>
+                    <div class="col__content-wrap">
+                        <p class="col__content-txt"><a href="tel:7356637327">7356637327</a></p>
+                        <a href="#" class="slide-link">
+                            <div class="slide-link__circ"></div>
+                            <div class="slide-link__line"></div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#slide-5" class="slide__scroll-link">
+                    <div class="slide__scroll-line"></div>
+                </a>
+            </div>
+            <div class="col col--2">
+                <div class="col__image-wrap">
+                    <img class="img img--1" src="./img/can-we-talk.png" />
+                </div>
+            </div>
+        </section>
 
-const sync = (event) => {
-  if (
-    !document.startViewTransition ||
-    event.target.controller.view.labelElement.innerText !== 'Theme'
-  )
-    return update()
-  document.startViewTransition(() => update())
-}
-ctrl.addBinding(config, 'animate', {
-  label: 'Animate',
-})
-ctrl.addBinding(config, 'snap', {
-  label: 'Snap',
-})
-ctrl.addBinding(config, 'start', {
-  label: 'Hue Start',
-  min: 0,
-  max: 1000,
-  step: 1,
-})
-ctrl.addBinding(config, 'end', {
-  label: 'Hue End',
-  min: 0,
-  max: 1000,
-  step: 1,
-})
-ctrl.addBinding(config, 'scroll', {
-  label: 'Scrollbar',
-})
-ctrl.addBinding(config, 'debug', {
-  label: 'Debug',
-})
+        <section class="slide slide--5" id="slide-5">
+            <div class="col col--1">
+                <div class="col__content col__content--5">
+                    <h2 class="col__content-title"><span class="line__inner"><a href="mailto:s4sreeniks@gmail.com">Email</a></span><br /><span class="line__inner">me</span></h2>
+                    <div class="col__content-wrap">
+                        <p class="col__content-txt"><a href="mailto:s4sreeniks@gmail.com">connect via Email</a>.</p>
+                        <a href="#" class="slide-link">
+                            <div class="slide-link__circ"></div>
+                            <div class="slide-link__line"></div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#slide-6" class="slide__scroll-link">
+                    <div class="slide__scroll-line"></div>
+                </a>
+            </div>
+            <div class="col col--2">
+                <div class="col__image-wrap">
+                    <img class="img img--1" src="./img/email-post.png" />
+                </div>
+            </div>
+        </section>
 
-ctrl.addBinding(config, 'theme', {
-  label: 'Theme',
-  options: {
-    System: 'system',
-    Light: 'light',
-    Dark: 'dark',
-  },
-})
+        <section class="slide slide--6" id="slide-6">
+            <div class="col col--1">
+                <div class="col__content col__content--6">
+                    <h2 class="col__content-title"><span class="line__inner"><a href="./resume.pdf">My</a></span><br /><span class="line__inner"><a href="./resume.pdf">Resume</a></span></h2>
+                    <div class="col__content-wrap">
+                        <p class="col__content-txt"><a href="./resume.pdf">Click here to downlode</a> </p>
+                        <a href="#" class="slide-link">
+                            <div class="slide-link__circ"></div>
+                            <div class="slide-link__line"></div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#slide-7" class="slide__scroll-link">
+                    <div class="slide__scroll-line"></div>
+                </a>
+            </div>
+            <div class="col col--2">
+                <div class="col__image-wrap">
+                    <img class="img img--1" src="./img/resume-icon.png" />
+                </div>
+            </div>
+        </section>
 
-ctrl.on('change', sync)
+        <footer class="footer" id="slide-7">
+            <a class="footer__link" target="_blank" href="./explore.html">Expolre</a>
+            <a class="footer__link-top" href="#slide-0">Top<span class="footer__link-top-line"></span></a>
+        </footer>
+    </div>
+</div>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin);
+gsap.registerPlugin(SplitText);
+gsap.registerPlugin(ScrollSmoother);
 
-// backfill the scroll functionality with GSAP
-if (
-  !CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)')
-) {
-  gsap.registerPlugin(ScrollTrigger)
+console.clear();
 
-  // animate the items with GSAP if there's no CSS support
-  items = gsap.utils.toArray('ul li')
+select = e => document.querySelector(e);
+selectAll = e => document.querySelectorAll(e);
 
-  gsap.set(items, { opacity: (i) => (i !== 0 ? 0.2 : 1) })
+const stage = select('.stage');
+const slides = selectAll(".slide");
+const links = selectAll(".slide__scroll-link");
+const titles = selectAll('.col__content-title');
+const introTitle = new SplitText('.intro__title', {type: "lines", linesClass: "intro-line"});
+const splitTitles = new SplitText(titles, {type: "lines, chars", linesClass: "line", charsClass: "char", position: "relative" });
+let slideID = 0;
 
-  const dimmer = gsap
-    .timeline()
-    .to(items.slice(1), {
-      opacity: 1,
-      stagger: 0.5,
+const smoother = ScrollSmoother.create({
+    smooth: 2,
+    effects: true,
+    // normalizeScroll: true,
+    smoothTouch: 0.1,
+});
+
+function initHeader() {
+    
+    // animate the logo and fake burger button into place
+    
+    let tl = gsap.timeline({delay: 0.5});
+    
+    tl.from('.logo', {
+        y: -40,
+        opacity: 0,
+        duration: 2,
+        ease: 'power4'
     })
-    .to(
-      items.slice(0, items.length - 1),
-      {
-        opacity: 0.2,
-        stagger: 0.5,
-      },
-      0
-    )
-
-  dimmerScrub = ScrollTrigger.create({
-    trigger: items[0],
-    endTrigger: items[items.length - 1],
-    start: 'center center',
-    end: 'center center',
-    animation: dimmer,
-    scrub: 0.2,
-  })
-
-  // register scrollbar changer
-  const scroller = gsap.timeline().fromTo(
-    document.documentElement,
-    {
-      '--hue': config.start,
-    },
-    {
-      '--hue': config.end,
-      ease: 'none',
-    }
-  )
-
-  scrollerScrub = ScrollTrigger.create({
-    trigger: items[0],
-    endTrigger: items[items.length - 1],
-    start: 'center center',
-    end: 'center center',
-    animation: scroller,
-    scrub: 0.2,
-  })
-
-  chromaEntry = gsap.fromTo(
-    document.documentElement,
-    {
-      '--chroma': 0,
-    },
-    {
-      '--chroma': 0.3,
-      ease: 'none',
-      scrollTrigger: {
-        scrub: 0.2,
-        trigger: items[0],
-        start: 'center center+=40',
-        end: 'center center',
-      },
-    }
-  )
-  chromaExit = gsap.fromTo(
-    document.documentElement,
-    {
-      '--chroma': 0.3,
-    },
-    {
-      '--chroma': 0,
-      ease: 'none',
-      scrollTrigger: {
-        scrub: 0.2,
-        trigger: items[items.length - 2],
-        start: 'center center',
-        end: 'center center-=40',
-      },
-    }
-  )
+    .from('.nav-btn__svg rect', {
+        scale: 0,
+        transformOrigin: "center right",
+        duration: 0.6,
+        ease: 'power4',
+        stagger: 0.1
+    }, 0.6)
+    .to('.nav-rect', {
+        scale: 0.8,
+        transformOrigin: "center left",
+        duration: 0.4,
+        ease: 'power2',
+        stagger: 0.1
+    }, "-=0.6")
+    
+    // create mouse animations for the faux burger button
+    
+    let navBtn = select('.nav-btn');
+    
+    navBtn.addEventListener("mouseover", (e) => {
+        gsap.to('.nav-rect', {
+            scaleX: 1,
+            transformOrigin: "top left",
+            duration: 0.4, 
+            ease: "power4"
+        });
+    });
+    
+    navBtn.addEventListener("mouseout", (e) => {
+        gsap.to('.nav-rect', {
+            scaleX: 0.8,
+            transformOrigin: "top left",
+            duration: 0.6, 
+            ease: "power4"
+        });
+    });
 }
-// run it
-update()
 
-    </script>
+function initIntro() {
+    
+    // animate the intro elements into place
+    
+    let tl = gsap.timeline({delay: 1.2});
+    
+    tl.from('.intro-line', {
+        // x: 100,
+        y: 400,
+        ease: 'power4',
+        duration: 3
+    })
+    .from('.intro__txt', {
+        x: -100,
+        opacity: 0,
+        ease: 'power4',
+        duration: 3
+    }, 0.7)
+    .from('.intro__img--1', {
+        // x: -50,
+        y: 50,
+        opacity: 0,
+        ease: 'power2',
+        duration: 10
+    }, 1)
+    .from('.intro__img--2', {
+        // x: 50,
+        y: -50,
+        opacity: 0,
+        ease: 'power2',
+        duration: 10
+    }, 1);
+    
+    // set up scrollTrigger animation for the when the intro scrolls out
+    
+    let stl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.intro',
+            scrub: 1,
+            start: "top bottom", // position of trigger meets the scroller position
+            end: "bottom top"
+        }
+    });
+    
+    stl.to('.intro__title', {
+        x: 400,
+        ease: 'power4.in',
+        duration: 3,
+        
+    })
+    .to('.intro__txt', {
+        y: 100,
+        ease: 'power4.in',
+        duration: 3,
+    }, 0);
+}
+
+function initLinks() {
+    
+    // ScrollToPlugin links
+    
+    links.forEach((link, index, e) => {     
+        
+        let linkST = link.querySelector('.slide__scroll-line');
+        
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            gsap.to(window, {
+                duration: 2, 
+                scrollTo:{
+                    y: "#slide-" + (index + 2)
+                },
+                ease: "power2.inOut"
+            });
+            slideID++;
+        });
+        
+        link.addEventListener("mouseover", (e) => {
+            gsap.to(linkST, {
+                y:40,
+                transformOrigin: "bottom center",
+                duration: 0.6, 
+                ease: "power4"
+            });
+        });
+        
+        link.addEventListener("mouseout", (e) => {
+            gsap.to(linkST, {
+                y: 0,
+                transformOrigin: "bottom center",
+                duration: 0.6, 
+                ease: "power4"
+            });
+        });
+        
+    });
+    
+    // ScrollToPlugin link back to the top
+    
+    let top = select('.footer__link-top');
+    
+    top.addEventListener("click", (e) => {
+        e.preventDefault();
+        scrollTop();
+    });
+    
+    top.addEventListener("mouseover", (e) => {
+        gsap.to('.footer__link-top-line', {
+            scaleY: 3,
+            transformOrigin: "bottom center",
+            duration: 0.6, 
+            ease: "power4"
+        });
+    });
+    
+    top.addEventListener("mouseout", (e) => {
+        gsap.to('.footer__link-top-line', {
+            scaleY: 1,
+            transformOrigin: "bottom center",
+            duration: 0.6, 
+            ease: "power4"
+        });
+    });
+    
+    // Dummy slide links
+    
+    let slideLinks = selectAll('.slide-link');
+    
+    slideLinks.forEach((slideLink, index, e) => {
+        
+        let slideL = slideLink.querySelector('.slide-link__line');
+        
+        slideLink.addEventListener("mouseover", (e) => {
+            gsap.to(slideL, {
+                x: 20,
+                scaleX: 0.3,
+                transformOrigin: "right center",
+                duration: 0.8, 
+                ease: "power4"
+            });
+        });
+        slideLink.addEventListener("mouseout", (e) => {
+            gsap.to(slideL, {
+                x: 0,
+                scaleX: 1,
+                transformOrigin: "right center",
+                duration: 0.8, 
+                ease: "power4"
+            });
+        });
+    })
+}
+
+function initSlides() {
+    
+    // Animation of each slide scrolling into view
+    
+    slides.forEach((slide, i) => {   
+        
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: slide,
+                start: "40% 50%", // position of trigger meets the scroller position
+            }
+        });
+ 
+        tl.from(slide.querySelectorAll('.col__content-title'), {
+            ease: "power4",
+            y: "+=5vh",
+            duration: 2.5,
+        })
+        .from(slide.querySelectorAll('.line__inner'), {
+            y: 200,
+            duration: 2,
+            ease: "power4",
+            stagger: 0.1
+        }, 0)
+        .from(slide.querySelectorAll('.col__content-txt'), {
+            x: 100,
+            y: 50,
+            opacity: 0,
+            duration: 2,
+            ease: "power4"
+        }, 0.4)
+        .from(slide.querySelectorAll('.slide-link'), {
+            x: -100,
+            y: 100,
+            opacity: 0,
+            duration: 2,
+            ease: "power4"
+        }, 0.3)
+        .from(slide.querySelectorAll('.slide__scroll-link'), {
+            y: 200,
+            duration: 3,
+            ease: "power4"
+        }, 0.4)
+        .to(slide.querySelectorAll('.slide__scroll-line'), {
+            scaleY: 0.6,
+            transformOrigin: "bottom left",
+            duration: 2.5, 
+            ease: "elastic(1,0.5)"
+        }, 1.4)
+	});
+    
+    // External footer link scroll animation
+    
+    gsap.from('.footer__link', {
+        scrollTrigger: {
+            trigger: '.footer',
+            scrub: 2,
+            start: "50% 100%", // position of trigger meets the scroller position
+            end: "0% 0%",
+        },
+        y: "20vh",
+        ease: 'sine'
+    })
+}
+
+function initParallax() {
+    
+    slides.forEach((slide, i) => {
+        let imageWrappers = slide.querySelectorAll('.col__image-wrap');
+        
+        gsap.fromTo(imageWrappers, {
+            y: "-30vh"
+        },{
+            y: "30vh",
+            scrollTrigger: {
+                trigger: slide,
+                scrub: true,
+                start: "top bottom", // position of trigger meets the scroller position
+                snap: {
+                    snapTo: 0.5, // 0.5 'cause the scroll animation range is 200vh for parallax effect
+                    duration: 1,
+                    ease: 'power4.inOut'
+                }
+            },
+            ease: 'none'
+        })
+    });
+}
+
+function scrollTop() {
+    gsap.to(window, {
+        duration: 2, 
+        scrollTo: {
+            y: "#slide-0"
+        },
+        ease: "power2.inOut"
+    });
+    gsap.to('.footer__link-top-line', {
+        scaleY: 1,
+        transformOrigin: "bottom center",
+        duration: 0.6, 
+        ease: "power4"
+    });
+}
+
+function initKeys() {
+    document.addEventListener('keydown', (e) => {
+        e.preventDefault();
+        if(event.keyCode == 40) { //down arrow to next slide
+            if(slideID <= slides.length) {
+                slideID++;
+                gsap.to(window, {
+                    duration: 2, 
+                    scrollTo:{
+                        y: "#slide-" + slideID 
+                    },
+                    ease: "power2.inOut"
+                });
+            }
+        }
+        else if(event.keyCode == 38) { // up arrow to top
+            slideID = 0;
+            scrollTop();
+        }
+    });
+}
+
+function init() {
+    gsap.set(stage, { autoAlpha: 1 });
+    initHeader();
+    initIntro();
+	initLinks();
+	initSlides();
+	initParallax();
+    initKeys();
+}
+
+window.onload = () => {
+	init();
+};
+</script>
 </body>
 </html>
