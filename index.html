@@ -796,13 +796,20 @@ function initIntro() {
         ease: 'power2',
         duration: 10
     }, 1)
-    .from('.intro__img--2', {
-        // x: 50,
-        y: -50,
-        opacity: 0,
-        ease: 'power2',
-        duration: 10
-    }, 1);
+.fromTo(
+  '.intro__img--2',
+  {
+    y: -50,
+    opacity: 0
+  },
+  {
+    y: 0,
+    opacity: 0.5,
+    ease: 'power2',
+    duration: 10
+  },
+  1
+);
     
     // set up scrollTrigger animation for the when the intro scrolls out
     
