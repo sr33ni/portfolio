@@ -18,7 +18,7 @@
     @include transition-ease;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: -8px;
       width: 28px;
@@ -28,7 +28,7 @@
     }
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 8px;
       width: 20px;
@@ -61,7 +61,6 @@
   opacity: 0.98;
   visibility: hidden;
 
-
   &.open {
     visibility: visible;
     height: 100vh;
@@ -79,10 +78,10 @@
     transform: translateY(-100%);
     @include transition-ease;
     @include media-md-max {
-        &:first-of-type{
-          display: none;
-        }
-        gap: 20px;
+      &:first-of-type {
+        display: none;
+      }
+      gap: 20px;
     }
     &.open {
       transform: translateY(0);
@@ -93,9 +92,9 @@
       @include transition-ease;
       @include media-md-max {
         flex: 0 0 auto;
-    }
-      &.badge{
-        a{
+      }
+      &.badge {
+        a {
           padding: 10px;
           background-color: $primary-color;
           color: $secondary-color;
@@ -103,76 +102,76 @@
           border: 1px solid $primary-color;
         }
       }
-      &.menu-icon{
-        a{
+      &.menu-icon {
+        a {
           padding: 0;
-            border: 1px solid #000;
-            border-radius: 7px;
-            width: 40px;
-            height: 40px;
-            position: relative;
-            top: 9px;
-            @include media-md-max {
-              width: 140px;
-              height: 140px;
-            }
-            &:after{
-              content: "";
-              display: inline-block;
-              background-color: #000;
-              mask-position: 50%;
-              background-size: 0px;
-              background-position: 0%;
-              mask-repeat: no-repeat;
-              mask-size: auto;
-              position: absolute;
-              inset: 7px;
+          border: 1px solid #000;
+          border-radius: 7px;
+          width: 40px;
+          height: 40px;
+          position: relative;
+          top: 9px;
+          @include media-md-max {
+            width: 140px;
+            height: 140px;
           }
-          &.home-icon{
-            &:after{
+          &:after {
+            content: "";
+            display: inline-block;
+            background-color: #000;
+            mask-position: 50%;
+            background-size: 0px;
+            background-position: 0%;
+            mask-repeat: no-repeat;
+            mask-size: auto;
+            position: absolute;
+            inset: 7px;
+          }
+          &.home-icon {
+            &:after {
               mask-image: url(../img/house-blank.svg);
               background-image: url(../img/house-blank.svg);
             }
           }
-          &.user-icon{
-            &:after{
+          &.user-icon {
+            &:after {
               mask-image: url(../img/user.svg);
               background-image: url(../img/user.svg);
             }
           }
-          &.explore-icon{
-            &:after{
+          &.explore-icon {
+            &:after {
               mask-image: url(../img/compass.svg);
               background-image: url(../img/compass.svg);
             }
           }
-          &.project-icon{
-            &:after{
+          &.project-icon {
+            &:after {
               mask-image: url(../img/rectangle-terminal.svg);
               background-image: url(../img/rectangle-terminal.svg);
             }
           }
           @include media-md-max {
-            &.home-icon{
-              &:after{
+            &.home-icon {
+              &:after {
                 mask-image: url(../img/house-blank.svg);
                 background-image: url(../img/house-blank.svg);
               }
             }
-            &.user-icon{
-              &:after{
+            &.user-icon {
+              &:after {
                 mask-image: url(../img/user.svg);
                 background-image: url(../img/user.svg);
               }
             }
-            &.explore-icon{
-              &:after{
+            &.explore-icon {
+              &:after {
                 mask-image: url(../img/compass.svg);
                 background-image: url(../img/compass.svg);
               }
             }
-            &.project-icon{
-              &:after{
+            &.project-icon {
+              &:after {
                 mask-image: url(../img/rectangle-terminal.svg);
                 background-image: url(../img/rectangle-terminal.svg);
               }
@@ -180,16 +179,15 @@
           }
         }
       }
-    
 
       &.open {
-       transform: translateX(0); 
+        transform: translateX(0);
       }
 
       &.active > a {
         color: $primary-color;
         position: relative;
-        &::after{
+        &::after {
           content: "";
           position: absolute;
           width: auto;
@@ -201,16 +199,16 @@
         }
       }
       &.active-icon > a {
-          background-color: $primary-color;
-          border-color: $primary-color;
-          color: $primary-color;
-          &::after{
-            content: "";
-            background-color: $secondary-color;
-          }
-          @include media-md-max {
-            border-color: $white-fff-color;
-          }
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: $primary-color;
+        &::after {
+          content: "";
+          background-color: $secondary-color;
+        }
+        @include media-md-max {
+          border-color: $white-fff-color;
+        }
       }
     }
 
@@ -228,21 +226,21 @@
     }
   }
   @include media-md {
-    &.nav-indicator{
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 30px;
-    border-bottom: 1px solid $primary-color;
-    border-top: 1px solid $primary-color;
-    width: 98%;
-    left: unset;
-    top: 10px;
-    background-color: $secondary-color;
+    &.nav-indicator {
+      display: flex;
+      justify-content: space-between;
+      padding: 0px 30px;
+      border-bottom: 1px solid $primary-color;
+      border-top: 1px solid $primary-color;
+      width: 98%;
+      left: unset;
+      top: 10px;
+      background-color: $secondary-color;
     }
-    .menu-nav{
-        &__link{
+    .menu-nav {
+      &__link {
         padding: 1.2rem 0;
-        }
+      }
     }
   }
 }

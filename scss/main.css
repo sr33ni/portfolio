@@ -228,11 +228,11 @@
   transition: all 0.5s ease-in-out;
 }
 @media screen and (max-width: 768px) {
-  .nav .menu-nav {
-    gap: 20px;
-  }
   .nav .menu-nav:first-of-type {
     display: none;
+  }
+  .nav .menu-nav {
+    gap: 20px;
   }
 }
 .nav .menu-nav.open {
@@ -440,7 +440,6 @@
   background-size: cover;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 .about > div:nth-of-type(1) > section:nth-of-type(1) p {
   font-size: 20px;
@@ -455,6 +454,9 @@
 .about > div:nth-of-type(1) > section:nth-of-type(1) p:last-of-type {
   font-size: 1rem;
   margin-top: auto;
+}
+.about > div:nth-of-type(1) > section:nth-of-type(1) {
+  position: relative;
 }
 .about > div:nth-of-type(1) > section:nth-of-type(1):after {
   content: "";
@@ -509,13 +511,13 @@
 .about > div:nth-of-type(2) > section > div:nth-of-type(1) .info-card .img-text p {
   line-height: normal;
 }
-.about > div:nth-of-type(2) > section > div:nth-of-type(1) .info-card .img-text .span-image-tag {
-  max-width: 115px;
-}
 @media screen and (max-width: 768px) {
   .about > div:nth-of-type(2) > section > div:nth-of-type(1) .info-card .img-text .span-image-tag {
     display: none;
   }
+}
+.about > div:nth-of-type(2) > section > div:nth-of-type(1) .info-card .img-text .span-image-tag {
+  max-width: 115px;
 }
 @media screen and (max-width: 768px) {
   .about > div:nth-of-type(2) > section > div:nth-of-type(1) .info-card .img-text .span-image-tag {
@@ -546,10 +548,6 @@
   flex-direction: column;
   color: #000;
   cursor: pointer;
-  flex: 1 1 33.3333333333%;
-}
-.about > div:nth-of-type(2) > section > div:nth-of-type(2) > div.info-card-container .info-card a {
-  color: inherit;
 }
 .about > div:nth-of-type(2) > section > div:nth-of-type(2) > div.info-card-container .info-card a i::after {
   content: "";
@@ -567,8 +565,14 @@
   text-align: right;
   padding: 5px 15px;
 }
+.about > div:nth-of-type(2) > section > div:nth-of-type(2) > div.info-card-container .info-card a {
+  color: inherit;
+}
 .about > div:nth-of-type(2) > section > div:nth-of-type(2) > div.info-card-container .info-card hr {
   margin-top: auto;
+}
+.about > div:nth-of-type(2) > section > div:nth-of-type(2) > div.info-card-container .info-card {
+  flex: 1 1 33.3333333333%;
 }
 .about > div:nth-of-type(2) > section > div:nth-of-type(2) > div.info-card-container .info-card.mail-info .icon {
   width: 75px;
@@ -663,7 +667,7 @@
   gap: 1em 1em;
   grid-auto-flow: row;
   padding: 1rem;
-  grid-template-areas: "a b b" "c b b" "c d e" "f f e" "f f g" "h i i" "j j 0" "j j 0" "k k k" "k k k" "k k k";
+  grid-template-areas: "a b b" "c b b" "c d e" "f f e" "f f g" "h i i" "j j 0" "j j 0" "k k k" "k k k" "k k k" "l l l";
 }
 @media screen and (max-width: 768px) {
   .masonry-grid-container {
@@ -729,16 +733,17 @@
 .masonry-grid-container .info-card {
   display: flex;
   flex-direction: column;
-  background-size: cover;
-  position: relative;
-  overflow: hidden;
-  justify-content: space-around;
-  background-repeat: no-repeat;
 }
 @media screen and (min-width: 768px) {
   .masonry-grid-container .info-card {
     background-size: 100%;
   }
+}
+.masonry-grid-container .info-card {
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  justify-content: space-around;
 }
 .masonry-grid-container .info-card > div {
   z-index: 2;
@@ -788,6 +793,9 @@
   .masonry-grid-container .info-card:hover::after {
     background-color: rgba(255, 255, 255, 0.59) !important;
   }
+}
+.masonry-grid-container .info-card {
+  background-repeat: no-repeat;
 }
 .masonry-grid-container .info-card .end-content-info:first-of-type {
   justify-content: flex-start;
